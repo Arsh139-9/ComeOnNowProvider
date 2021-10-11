@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Medium.ttf">
+            <string>Poppins-Medium</string>
+        </array>
+        <array key="Poppins-Regular.ttf">
+            <string>Poppins-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="120" id="KGk-i7-Jjw" customClass="NotificationsTVCell" customModule="SureShow" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="356" height="120"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="356" height="120"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ld-Tl-AJd">
+                        <rect key="frame" x="10" y="5" width="336" height="110"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pf" translatesAutoresizingMaskIntoConstraints="NO" id="O4h-8S-dnN">
+                                <rect key="frame" x="10" y="2" width="50.5" height="50.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="O4h-8S-dnN" secondAttribute="height" multiplier="1:1" id="ec6-eo-1yY"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ctG-Fj-Qy8">
+                                <rect key="frame" x="70.5" y="2" width="208" height="96.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Grave Jadson accepted your appointment schedule on." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7vl-Ul-f9J" customClass="SSMediumLabel" customModule="SureShow" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="208" height="35"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="5-12-2021, 12:00 PM to 02:00 Pm." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UND-sZ-RqS" customClass="SSRegularLabel" customModule="SureShow" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="76.5" width="202" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="fZI-mD-46l"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="UND-sZ-RqS" secondAttribute="bottom" id="Ezp-uU-zp6"/>
+                                    <constraint firstItem="UND-sZ-RqS" firstAttribute="top" secondItem="7vl-Ul-f9J" secondAttribute="bottom" id="Ife-mp-F92"/>
+                                    <constraint firstAttribute="trailing" secondItem="7vl-Ul-f9J" secondAttribute="trailing" id="Or5-Pn-J9d"/>
+                                    <constraint firstItem="7vl-Ul-f9J" firstAttribute="top" secondItem="ctG-Fj-Qy8" secondAttribute="top" id="ipS-kY-WRU"/>
+                                    <constraint firstItem="7vl-Ul-f9J" firstAttribute="leading" secondItem="ctG-Fj-Qy8" secondAttribute="leading" id="wFF-qe-bUS"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11:35 AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZtB-Xg-rBk" customClass="SSMediumLabel" customModule="SureShow" customModuleProvider="target">
+                                <rect key="frame" x="286" y="2" width="56" height="15.5"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="13"/>
+                                <color key="textColor" name="appGray"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y0Q-kF-FHc">
+                                <rect key="frame" x="10" y="108.5" width="336" height="1.5"/>
+                                <color key="backgroundColor" name="appLabel"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1.5" id="fW9-Mn-ouR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="O4h-8S-dnN" firstAttribute="width" secondItem="6ld-Tl-AJd" secondAttribute="width" multiplier="0.15" id="4LJ-0L-PCm"/>
+                            <constraint firstItem="y0Q-kF-FHc" firstAttribute="width" secondItem="6ld-Tl-AJd" secondAttribute="width" id="6CD-Lj-ebj"/>
+                            <constraint firstItem="y0Q-kF-FHc" firstAttribute="leading" secondItem="O4h-8S-dnN" secondAttribute="leading" id="7ic-N7-2mi"/>
+                            <constraint firstItem="ctG-Fj-Qy8" firstAttribute="top" secondItem="O4h-8S-dnN" secondAttribute="top" id="H5U-Mf-Wf1"/>
+                            <constraint firstItem="O4h-8S-dnN" firstAttribute="top" secondItem="6ld-Tl-AJd" secondAttribute="top" constant="2" id="J47-fm-RSH"/>
+                            <constraint firstItem="O4h-8S-dnN" firstAttribute="leading" secondItem="6ld-Tl-AJd" secondAttribute="leading" constant="10" id="JbP-hb-i7d"/>
+                            <constraint firstItem="ZtB-Xg-rBk" firstAttribute="top" secondItem="ctG-Fj-Qy8" secondAttribute="top" id="aEf-2u-qCH"/>
+                            <constraint firstItem="ZtB-Xg-rBk" firstAttribute="leading" secondItem="ctG-Fj-Qy8" secondAttribute="trailing" constant="7.5" id="eTD-l9-uoe"/>
+                            <constraint firstAttribute="bottom" secondItem="y0Q-kF-FHc" secondAttribute="bottom" id="jxf-57-ZSM"/>
+                            <constraint firstItem="y0Q-kF-FHc" firstAttribute="top" secondItem="ctG-Fj-Qy8" secondAttribute="bottom" constant="10" id="kwz-Pg-6lu"/>
+                            <constraint firstItem="ctG-Fj-Qy8" firstAttribute="leading" secondItem="O4h-8S-dnN" secondAttribute="trailing" constant="10" id="mvi-HB-GWN"/>
+                            <constraint firstItem="ctG-Fj-Qy8" firstAttribute="width" secondItem="6ld-Tl-AJd" secondAttribute="width" multiplier="0.62" id="tRH-DU-mDp"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="6ld-Tl-AJd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="X0b-vh-GZt"/>
+                    <constraint firstAttribute="bottom" secondItem="6ld-Tl-AJd" secondAttribute="bottom" constant="5" id="ga7-6z-QGt"/>
+                    <constraint firstItem="6ld-Tl-AJd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="qij-6I-mVt"/>
+                    <constraint firstAttribute="trailing" secondItem="6ld-Tl-AJd" secondAttribute="trailing" constant="10" id="vPd-WZ-iKC"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="imgMain" destination="O4h-8S-dnN" id="Lwv-BL-nag"/>
+                <outlet property="lblAppointment" destination="UND-sZ-RqS" id="DMR-Kj-4tY"/>
+                <outlet property="lblName" destination="7vl-Ul-f9J" id="Xfz-em-pbD"/>
+                <outlet property="lblTime" destination="ZtB-Xg-rBk" id="dcy-JN-8PS"/>
+            </connections>
+            <point key="canvasLocation" x="200.00000000000003" y="123.88392857142857"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="pf" width="371" height="381"/>
+        <namedColor name="appGray">
+            <color red="0.71399998664855957" green="0.71399998664855957" blue="0.71399998664855957" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="appLabel">
+            <color red="0.89800000190734863" green="0.89800000190734863" blue="0.89800000190734863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

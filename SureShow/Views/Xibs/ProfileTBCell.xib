@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Regular.ttf">
+            <string>Poppins-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="65" id="KGk-i7-Jjw" customClass="ProfileTBCell" customModule="SureShow" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="351" height="65"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="351" height="65"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M7e-kP-rSI">
+                        <rect key="frame" x="15" y="23.5" width="17.5" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="M7e-kP-rSI" secondAttribute="height" multiplier="1:1" id="um7-lz-sZa"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wc0-EL-lEc" customClass="SSRegularLabel" customModule="SureShow" customModuleProvider="target">
+                        <rect key="frame" x="49.5" y="23" width="301.5" height="19"/>
+                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
+                        <color key="textColor" name="appTitle"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xPZ-pI-g9M">
+                        <rect key="frame" x="49.5" y="64" width="351" height="1"/>
+                        <color key="backgroundColor" name="appLabel"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="8ja-Zp-q15"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="xPZ-pI-g9M" secondAttribute="bottom" id="9dA-tW-nwi"/>
+                    <constraint firstItem="wc0-EL-lEc" firstAttribute="leading" secondItem="M7e-kP-rSI" secondAttribute="trailing" constant="17" id="9re-DG-07P"/>
+                    <constraint firstAttribute="trailing" secondItem="wc0-EL-lEc" secondAttribute="trailing" id="EgG-Vk-7uM"/>
+                    <constraint firstItem="xPZ-pI-g9M" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="FTc-ls-ycr"/>
+                    <constraint firstItem="M7e-kP-rSI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="IY9-lb-grI"/>
+                    <constraint firstItem="xPZ-pI-g9M" firstAttribute="leading" secondItem="wc0-EL-lEc" secondAttribute="leading" id="Ljj-SG-Anv"/>
+                    <constraint firstItem="M7e-kP-rSI" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Uh2-YZ-jp7"/>
+                    <constraint firstItem="wc0-EL-lEc" firstAttribute="centerY" secondItem="M7e-kP-rSI" secondAttribute="centerY" id="bEI-QT-uwj"/>
+                    <constraint firstItem="M7e-kP-rSI" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.05" id="pcI-5F-5Wd"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="imgIcon" destination="M7e-kP-rSI" id="o2S-ou-1ik"/>
+                <outlet property="lblName" destination="wc0-EL-lEc" id="BjC-t0-tzP"/>
+            </connections>
+            <point key="canvasLocation" x="-39.855072463768117" y="85.379464285714278"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="appLabel">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="appTitle">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
