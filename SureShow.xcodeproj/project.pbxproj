@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18E9527E271564B300AD0F50 /* AFWrapperClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E9527D271564B300AD0F50 /* AFWrapperClass.swift */; };
+		18E952802715664A00AD0F50 /* AppAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E9527F2715664A00AD0F50 /* AppAlert.swift */; };
+		18E95282271566A900AD0F50 /* LoginSignUpEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E95281271566A900AD0F50 /* LoginSignUpEntity.swift */; };
+		18E95284271566AE00AD0F50 /* ForgotPasswordEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E95283271566AE00AD0F50 /* ForgotPasswordEntity.swift */; };
+		18E95286271566B300AD0F50 /* GetUserProfileDetailEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E95285271566B300AD0F50 /* GetUserProfileDetailEntity.swift */; };
+		18E9528A271570A200AD0F50 /* RestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E95289271570A200AD0F50 /* RestManager.swift */; };
 		7C1E20FC26F1C3B70008A283 /* ProfileTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1E20FA26F1C3B70008A283 /* ProfileTBCell.swift */; };
 		7C1E20FD26F1C3B70008A283 /* ProfileTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1E20FB26F1C3B70008A283 /* ProfileTBCell.xib */; };
 		7C1E210226F1C9270008A283 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1E210126F1C9270008A283 /* ProfileVC.swift */; };
@@ -23,8 +29,6 @@
 		7C1E212426F21B760008A283 /* HomeCancelTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1E212226F21B760008A283 /* HomeCancelTVCell.xib */; };
 		7C1E212926F30B090008A283 /* ProfileViewForTitle.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1E212826F30B090008A283 /* ProfileViewForTitle.xib */; };
 		7C1E212C26F30B1F0008A283 /* ProfileViewForTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1E212B26F30B1F0008A283 /* ProfileViewForTitle.swift */; };
-		7C1E212F26F314950008A283 /* LoadingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1E212E26F314950008A283 /* LoadingManager.swift */; };
-		7C1E213226F318860008A283 /* LoadingIndicatorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1E213126F318860008A283 /* LoadingIndicatorVC.swift */; };
 		7C1E213526F31DCD0008A283 /* AppointmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1E213426F31DCD0008A283 /* AppointmentVC.swift */; };
 		7C1E213B26F334CA0008A283 /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1E213A26F334CA0008A283 /* AboutVC.swift */; };
 		7C1E213E26F335A70008A283 /* PrivacyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1E213D26F335A70008A283 /* PrivacyVC.swift */; };
@@ -42,7 +46,6 @@
 		7C87EEAF26EF3BDD00F65F5C /* AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EEAE26EF3BDD00F65F5C /* AppExtensions.swift */; };
 		7C87EEB226EF3BE200F65F5C /* AppDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EEB126EF3BE200F65F5C /* AppDefaults.swift */; };
 		7C87EEB726EF3BEB00F65F5C /* AppNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EEB626EF3BEB00F65F5C /* AppNavigations.swift */; };
-		7C87EEBA26EF3BFB00F65F5C /* RestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EEB926EF3BFB00F65F5C /* RestManager.swift */; };
 		7C87EEBD26EF3C2300F65F5C /* AppConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EEBC26EF3C2300F65F5C /* AppConstant.swift */; };
 		7C87EEC726EF3D3200F65F5C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C87EEC526EF3D3200F65F5C /* Localizable.strings */; };
 		7C87EED826EF3DC100F65F5C /* LocalizableConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87EED726EF3DC100F65F5C /* LocalizableConstants.swift */; };
@@ -79,6 +82,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18E9527D271564B300AD0F50 /* AFWrapperClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AFWrapperClass.swift; sourceTree = "<group>"; };
+		18E9527F2715664A00AD0F50 /* AppAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAlert.swift; sourceTree = "<group>"; };
+		18E95281271566A900AD0F50 /* LoginSignUpEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSignUpEntity.swift; sourceTree = "<group>"; };
+		18E95283271566AE00AD0F50 /* ForgotPasswordEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordEntity.swift; sourceTree = "<group>"; };
+		18E95285271566B300AD0F50 /* GetUserProfileDetailEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetUserProfileDetailEntity.swift; sourceTree = "<group>"; };
+		18E95289271570A200AD0F50 /* RestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestManager.swift; sourceTree = "<group>"; };
 		3E3CCEE676C77EE7FA7CF1E2 /* Pods-SureShow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureShow.release.xcconfig"; path = "Target Support Files/Pods-SureShow/Pods-SureShow.release.xcconfig"; sourceTree = "<group>"; };
 		7C1E20FA26F1C3B70008A283 /* ProfileTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTBCell.swift; sourceTree = "<group>"; };
 		7C1E20FB26F1C3B70008A283 /* ProfileTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTBCell.xib; sourceTree = "<group>"; };
@@ -96,8 +105,6 @@
 		7C1E212226F21B760008A283 /* HomeCancelTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCancelTVCell.xib; sourceTree = "<group>"; };
 		7C1E212826F30B090008A283 /* ProfileViewForTitle.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewForTitle.xib; sourceTree = "<group>"; };
 		7C1E212B26F30B1F0008A283 /* ProfileViewForTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewForTitle.swift; sourceTree = "<group>"; };
-		7C1E212E26F314950008A283 /* LoadingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingManager.swift; sourceTree = "<group>"; };
-		7C1E213126F318860008A283 /* LoadingIndicatorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorVC.swift; sourceTree = "<group>"; };
 		7C1E213426F31DCD0008A283 /* AppointmentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentVC.swift; sourceTree = "<group>"; };
 		7C1E213A26F334CA0008A283 /* AboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
 		7C1E213D26F335A70008A283 /* PrivacyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyVC.swift; sourceTree = "<group>"; };
@@ -117,7 +124,6 @@
 		7C87EEAE26EF3BDD00F65F5C /* AppExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppExtensions.swift; sourceTree = "<group>"; };
 		7C87EEB126EF3BE200F65F5C /* AppDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDefaults.swift; sourceTree = "<group>"; };
 		7C87EEB626EF3BEB00F65F5C /* AppNavigations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNavigations.swift; sourceTree = "<group>"; };
-		7C87EEB926EF3BFB00F65F5C /* RestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestManager.swift; sourceTree = "<group>"; };
 		7C87EEBC26EF3C2300F65F5C /* AppConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
 		7C87EEC626EF3D3200F65F5C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7C87EED726EF3DC100F65F5C /* LocalizableConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizableConstants.swift; sourceTree = "<group>"; };
@@ -166,6 +172,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18E95287271566D300AD0F50 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				7C87EF1126EF74A800F65F5C /* LogInVC.swift */,
+				7C87EF2426EF7C7C00F65F5C /* ForgotPasswordVC.swift */,
+				7C9D13A126F0A5C10039028E /* ChangePasswordVC.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		18E9528827156A9500AD0F50 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				7C1E210126F1C9270008A283 /* ProfileVC.swift */,
+				7C9D13A526F0A5E30039028E /* EditProfileVC.swift */,
+				7C1E213A26F334CA0008A283 /* AboutVC.swift */,
+				7C9D13A826F0A6060039028E /* HistoryVC.swift */,
+				7C1E213D26F335A70008A283 /* PrivacyVC.swift */,
+				7C1E214026F3366D0008A283 /* ServiceVC.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		702C57F7BA5F65D1F5269DAD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +250,9 @@
 		7C87EEA226EF3AE800F65F5C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				18E95281271566A900AD0F50 /* LoginSignUpEntity.swift */,
+				18E95283271566AE00AD0F50 /* ForgotPasswordEntity.swift */,
+				18E95285271566B300AD0F50 /* GetUserProfileDetailEntity.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -257,6 +289,9 @@
 		7C87EEA626EF3B4E00F65F5C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				18E9527F2715664A00AD0F50 /* AppAlert.swift */,
+				18E9527D271564B300AD0F50 /* AFWrapperClass.swift */,
+				18E95289271570A200AD0F50 /* RestManager.swift */,
 				7C87EEDA26EF3DD300F65F5C /* AppConstants.swift */,
 				7C87EEB126EF3BE200F65F5C /* AppDefaults.swift */,
 				7C87EE8C26EF3A4800F65F5C /* AppDelegate.swift */,
@@ -274,7 +309,6 @@
 			isa = PBXGroup;
 			children = (
 				7C87EEBC26EF3C2300F65F5C /* AppConstant.swift */,
-				7C87EEB926EF3BFB00F65F5C /* RestManager.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -290,7 +324,6 @@
 			isa = PBXGroup;
 			children = (
 				7C50965826F4B8F20058E146 /* DisplayAlertManager.swift */,
-				7C1E212E26F314950008A283 /* LoadingManager.swift */,
 				7C692D8A26FC90A5005608C3 /* HelperMethods.swift */,
 				7C9D138326F073E20039028E /* DateTimeManager.swift */,
 				7C87EEDD26EF3DF100F65F5C /* NavigationManager.swift */,
@@ -347,24 +380,16 @@
 		7C87EEC226EF3CF000F65F5C /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				7C1E213A26F334CA0008A283 /* AboutVC.swift */,
+				18E9528827156A9500AD0F50 /* Profile */,
+				18E95287271566D300AD0F50 /* Auth */,
 				7C9D139D26F0A56A0039028E /* AddAppointmentVC.swift */,
 				7C7ED85B270ADD7B000FDC18 /* AddQueueVC.swift */,
 				7C1E214326F3586A0008A283 /* AppointmentDetailsVC.swift */,
 				7C1E214626F35EE90008A283 /* AppointmentShowVC.swift */,
 				7C1E213426F31DCD0008A283 /* AppointmentVC.swift */,
-				7C9D13A126F0A5C10039028E /* ChangePasswordVC.swift */,
-				7C9D13A526F0A5E30039028E /* EditProfileVC.swift */,
-				7C87EF2426EF7C7C00F65F5C /* ForgotPasswordVC.swift */,
-				7C9D13A826F0A6060039028E /* HistoryVC.swift */,
 				7C1E211926F200930008A283 /* HomeVC.swift */,
-				7C1E213126F318860008A283 /* LoadingIndicatorVC.swift */,
-				7C87EF1126EF74A800F65F5C /* LogInVC.swift */,
 				7C1E210D26F1E10A0008A283 /* NotificationVC.swift */,
-				7C1E213D26F335A70008A283 /* PrivacyVC.swift */,
-				7C1E210126F1C9270008A283 /* ProfileVC.swift */,
 				7C1E211626F1FB900008A283 /* QueueVC.swift */,
-				7C1E214026F3366D0008A283 /* ServiceVC.swift */,
 				7C9D13B526F0C3320039028E /* TabBarVC.swift */,
 			);
 			path = VC;
@@ -553,7 +578,9 @@
 				7C1E211A26F200930008A283 /* HomeVC.swift in Sources */,
 				7C9D13A926F0A6060039028E /* HistoryVC.swift in Sources */,
 				7C87EEEF26EF3E1100F65F5C /* SSTextField.swift in Sources */,
+				18E95284271566AE00AD0F50 /* ForgotPasswordEntity.swift in Sources */,
 				7C1E212C26F30B1F0008A283 /* ProfileViewForTitle.swift in Sources */,
+				18E95286271566B300AD0F50 /* GetUserProfileDetailEntity.swift in Sources */,
 				7C9D139E26F0A56A0039028E /* AddAppointmentVC.swift in Sources */,
 				7C50965926F4B8F20058E146 /* DisplayAlertManager.swift in Sources */,
 				7C1E211726F1FB900008A283 /* QueueVC.swift in Sources */,
@@ -565,7 +592,9 @@
 				7C1E211E26F21A570008A283 /* HomeConfirmedTVCell.swift in Sources */,
 				7C1E212326F21B760008A283 /* HomeCancelTVCell.swift in Sources */,
 				7C9D138426F073E20039028E /* DateTimeManager.swift in Sources */,
+				18E9527E271564B300AD0F50 /* AFWrapperClass.swift in Sources */,
 				7C87EEB226EF3BE200F65F5C /* AppDefaults.swift in Sources */,
+				18E952802715664A00AD0F50 /* AppAlert.swift in Sources */,
 				7C1E210E26F1E10A0008A283 /* NotificationVC.swift in Sources */,
 				7C87EEE126EF3DF100F65F5C /* NavigationManager.swift in Sources */,
 				7C87EEE326EF3DF100F65F5C /* ValidationManager.swift in Sources */,
@@ -582,13 +611,13 @@
 				7C87EEE426EF3DF100F65F5C /* PreferenceManager.swift in Sources */,
 				7C87EEF326EF3E1100F65F5C /* SSImagePickerVC.swift in Sources */,
 				7C87EEEE26EF3E1100F65F5C /* SSAssistiveTouchView.swift in Sources */,
+				18E95282271566A900AD0F50 /* LoginSignUpEntity.swift in Sources */,
 				7C9D138726F074170039028E /* SSTextView.swift in Sources */,
-				7C87EEBA26EF3BFB00F65F5C /* RestManager.swift in Sources */,
 				7C87EEB726EF3BEB00F65F5C /* AppNavigations.swift in Sources */,
-				7C1E212F26F314950008A283 /* LoadingManager.swift in Sources */,
 				7C9D13D626F1AF7A0039028E /* SegmentView.swift in Sources */,
 				7C87EEF026EF3E1100F65F5C /* SSImageView.swift in Sources */,
 				7C1E210926F1D4450008A283 /* NotificationsTVCell.swift in Sources */,
+				18E9528A271570A200AD0F50 /* RestManager.swift in Sources */,
 				7C87EF2526EF7C7C00F65F5C /* ForgotPasswordVC.swift in Sources */,
 				7C1E211226F1E9830008A283 /* QueueTVCell.swift in Sources */,
 				7C1E214726F35EE90008A283 /* AppointmentShowVC.swift in Sources */,
@@ -599,7 +628,6 @@
 				7C87EEAF26EF3BDD00F65F5C /* AppExtensions.swift in Sources */,
 				7C1E213B26F334CA0008A283 /* AboutVC.swift in Sources */,
 				7C87EEF126EF3E1100F65F5C /* SSDebouncer.swift in Sources */,
-				7C1E213226F318860008A283 /* LoadingIndicatorVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,15 +783,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = BMFBQPH9CZ;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Add.SureShow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.comeonnowprovider.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = come_on_now_provider_12_oct_2021_dist;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -775,15 +806,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = BMFBQPH9CZ;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Add.SureShow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.comeonnowprovider.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = come_on_now_provider_12_oct_2021_dist;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

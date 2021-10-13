@@ -202,19 +202,6 @@ extension Collection {
     }
 }
 
-extension String {
-    func chunkFormatted(withChunkSize chunkSize: Int = 4,
-                        withSeparator separator: Character = "-") -> String {
-        return self.filter { $0 != separator }.chunk(n: chunkSize)
-            .map{ String($0) }.joined(separator: String(separator))
-    }
-    var trimWhiteSpace: String{
-        return self.trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-    var htmlStripped : String{
-        let tagFree = self.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
-        return tagFree.replacingOccurrences(of: "&[^;]+;", with: "", options: String.CompareOptions.regularExpression, range: nil)
-    }
-}
+
 
 

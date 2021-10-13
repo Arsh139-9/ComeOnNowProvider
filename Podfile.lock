@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.8.2)
+  - Alamofire (5.4.4)
   - AssistantKit (0.6.1)
   - IQKeyboardManagerSwift (6.5.5)
   - KRPullLoader (1.3.0)
@@ -11,11 +11,12 @@ PODS:
     - SDWebImage/Core (= 4.4.8)
   - SDWebImage/Core (4.4.8)
   - SKCountryPicker (1.3.2)
+  - SVProgressHUD (2.2.5)
   - Toucan (1.1.0)
   - "UITextView+Placeholder (1.4.0)"
 
 DEPENDENCIES:
-  - Alamofire (~> 4.8.1)
+  - Alamofire (~> 5.4)
   - AssistantKit (~> 0.6.1)
   - IQKeyboardManagerSwift (~> 6.5.1)
   - KRPullLoader
@@ -25,6 +26,7 @@ DEPENDENCIES:
   - pop (~> 1.0.12)
   - SDWebImage (~> 4.4.5)
   - SKCountryPicker
+  - SVProgressHUD
   - Toucan
   - "UITextView+Placeholder (~> 1.4.0)"
 
@@ -40,11 +42,12 @@ SPEC REPOS:
     - pop
     - SDWebImage
     - SKCountryPicker
+    - SVProgressHUD
     - Toucan
     - "UITextView+Placeholder"
 
 SPEC CHECKSUMS:
-  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
   AssistantKit: 7dd40c019e9a06e93555ed58498a2d212fcb408d
   IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
   KRPullLoader: c81594d578c90f46c1fe539b8d9a6a581ce3bdb0
@@ -54,9 +57,10 @@ SPEC CHECKSUMS:
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
   SKCountryPicker: ceff8cfffc0ddde2088f2fcc2d01d1ad530c0b03
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   Toucan: 8f228fabb21521b9658692df9325fe76e71d74b2
   "UITextView+Placeholder": d7b0c400921f66523f3a85d74f774512e14f6502
 
-PODFILE CHECKSUM: 0ba1834fe1a724aead7e8a2febcb0b84e5e4e359
+PODFILE CHECKSUM: 3a0bf369a0da0243027786d9aa7461f000739ca1
 
 COCOAPODS: 1.10.1

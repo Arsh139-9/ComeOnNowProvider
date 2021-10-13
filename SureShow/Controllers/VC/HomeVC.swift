@@ -145,12 +145,12 @@ class HomeVC : BaseVC, UITableViewDataSource, UITableViewDelegate, SegmentViewDe
         
         if view == segment1 {
             
-            LoadingManager.shared.showLoading()
+//            LoadingManager.shared.showLoading()
             segment2.isSelected = false
             
         } else if view == segment2 {
             
-            LoadingManager.shared.showLoading()
+//            LoadingManager.shared.showLoading()
             segment1.isSelected = false
             
         }

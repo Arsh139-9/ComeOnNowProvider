@@ -10,7 +10,7 @@ target 'SureShow' do
   pod 'AssistantKit', '~> 0.6.1'
   pod 'IQKeyboardManagerSwift', '~> 6.5.1'
   pod 'Localize-Swift', '~> 3.1.0'
-  pod 'Alamofire', '~> 4.8.1'
+  pod 'Alamofire', '~> 5.4'
   pod 'lottie-ios', '~> 3.1.6'
   pod 'SDWebImage', '~> 4.4.5'
   pod 'KRPullLoader'
@@ -19,6 +19,6 @@ target 'SureShow' do
   pod 'Toucan'
   pod "MonthYearPicker", '~> 4.0.2'
   pod 'SKCountryPicker'
-
+  pod 'SVProgressHUD'
 
 end

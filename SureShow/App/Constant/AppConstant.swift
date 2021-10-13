@@ -19,12 +19,13 @@ let appScene = (UIApplication.shared.delegate as! SceneDelegate)
 
 
 struct WSMethods {
-    static let signIn = "logIn.php"
-    static let signUp = "signUp.php"
+    static let signIn = "user/login"
+    static let signUp = "user/signup"
     static let addchildren = "addchildren.php"
     static let getChildrenDetails = "getChildrenDetails.php"
     static let getProfileDetails = "getProfileDetails.php"
-    static let changePassword = "changePassword.php"
+    static let changePassword = "user/changepassword"
+    static let resentVerficationEmail = "ResentVerficationEmail.php"
     static let addBiWeeklyInventory = "AddBiWeeklyInventory.php"
     static let getAllProduct = "GetAllProduct.php"
     static let addProduct = "AddProduct.php"
@@ -38,18 +39,18 @@ struct WSMethods {
     static let getAllBuildOrderDetail = "GetAllBuildOrderDetail.php"
     static let addBuildOrder = "AddBuildOrder.php"
     static let getNotificationDetailById = "GetNotificationDetailById.php"
-
     
-    static let logOut = "logOut.php"
-    static let getUserDetail = "getProfileDetails.php"
-    static let editProfile = "editProfile.php"
-    static let forgotPassword = "forgetPassword.php"
-   
+    
+    static let logOut = "user/logout"
+    static let getUserDetail = "user/profile"
+    static let editProfile = "user/profile"
+    static let forgotPassword = "user/forgotpassword"
+    
     
 }
 
 let WS_Live = ""
-let WS_Staging = "https://www.dharmani.com/ComeOnNow/webservice/"
+let WS_Staging = "https://comeonnow.io/come_on_now/api/v1/"
 
 let kBASEURL = WS_Staging
 
@@ -76,7 +77,7 @@ struct ViewControllerIdentifier {
     static let BuildOrderDetailVC = "BuildOrderDetailVC"
     static let AddBuildOrderVC = "AddBuildOrderVC"
     static let NotificationVC = "NotificationVC"
-
+    
     
     
     
@@ -95,16 +96,16 @@ struct ViewControllerIdentifier {
     static let AddIngredientForkastVC = "AddIngredientForkastVC"
     static let ProductMappingVC = "ProductMappingVC"
     static let PopUpListVC = "PopUpListVC"
-
+    
     
 }
 struct StoryboardName {
     static let Main = "Main"
-    static let Setting = "Setting"
+    static let HomeChild = "HomeChild"
     static let BiweekelyInventory = "BiweekelyInventory"
     static let ProductIngredients = "ProductIngredients"
     static let BuildOrder = "BuildOrder"
-
+    
 }
 
 
