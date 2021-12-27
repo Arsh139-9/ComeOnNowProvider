@@ -12,7 +12,6 @@ import WebKit
 class PrivacyVC : BaseVC {
     
     @IBOutlet weak var privacyWebView: WKWebView!
-    
     //------------------------------------------------------
     
     //MARK: Memory Management Method
@@ -40,6 +39,12 @@ class PrivacyVC : BaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let url = NSURL(string: SettingWebLinks.privacyPolicy)
+        let request = NSURLRequest(url: url! as URL)
+        privacyWebView.navigationDelegate = self
+        privacyWebView.load(request as URLRequest)
+//        headingLbl.text = linkLblText
+        // Do any additional setup after loading the view.
     }
     
     //------------------------------------------------------
@@ -49,4 +54,24 @@ class PrivacyVC : BaseVC {
     }
     
     //------------------------------------------------------
+}
+extension PrivacyVC:WKNavigationDelegate{
+
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+    AFWrapperClass.svprogressHudShow(title: "Loading...", view: self)
+  }
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    AFWrapperClass.svprogressHudDismiss(view: self)
+  }
+
+    private func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
+        Alert.present(
+            title: AppAlertTitle.appName.rawValue,
+            message: error.localizedDescription,
+            actions: .ok(handler: {
+            }),
+            from: self
+        )
+      }
 }

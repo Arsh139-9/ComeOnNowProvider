@@ -28,6 +28,8 @@ class ProfileVC : BaseVC, UITableViewDelegate, UITableViewDataSource {
         static let aboutIcon = SSImageName.iconAbout
         static let history = LocalizableConstants.Controller.Profile.history
         static let HistoryIcon = SSImageName.iconHistory
+        static let scheduledAppointment = LocalizableConstants.Controller.Profile.scheduleAppointment
+        static let scheduledAppointmentIcon = SSImageName.iconHistory
         static let privacyPolicy = LocalizableConstants.Controller.Profile.privacy
         static let privacyPolicyIcon = SSImageName.iconPrivacy
         static let termsOfServices = LocalizableConstants.Controller.Profile.termsOfService
@@ -43,6 +45,7 @@ class ProfileVC : BaseVC, UITableViewDelegate, UITableViewDataSource {
             ["name": ProfileItems.changePassword, "image": ProfileItems.changePasswordIcon],
             ["name": ProfileItems.about, "image": ProfileItems.aboutIcon],
             ["name": ProfileItems.history, "image": ProfileItems.HistoryIcon],
+            ["name": ProfileItems.scheduledAppointment, "image": ProfileItems.scheduledAppointmentIcon],
             ["name": ProfileItems.privacyPolicy, "image": ProfileItems.privacyPolicyIcon],
             ["name": ProfileItems.termsOfServices, "image": ProfileItems.termsOfServicesIcon],
             ["name": ProfileItems.logout, "image": ProfileItems.logoutIcon]
@@ -119,14 +122,9 @@ class ProfileVC : BaseVC, UITableViewDelegate, UITableViewDataSource {
                         self.emailLbl.text = self.getProfileResp?.email ?? ""
                         var sPhotoStr = self.getProfileResp?.image ?? ""
                         sPhotoStr = sPhotoStr.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? ""
-                        //        if sPhotoStr != ""{
                         self.imgProfile.sd_setImage(with: URL(string: sPhotoStr ), placeholderImage:UIImage(named:"place"))
-                        //}
-                        
                     }
-                    //                    showAlertMessage(title: kAppName.localized(), message: message , okButton: "OK", controller: self) {
-                    //
-                    //                    }
+                 
                 }
                 else if status == 401{
                     removeAppDefaults(key:"AuthToken")
@@ -158,10 +156,8 @@ class ProfileVC : BaseVC, UITableViewDelegate, UITableViewDataSource {
             let message = response["message"] as? String ?? ""
             if let status = response["status"] as? Int {
                 if status == 200{
-                    //                    showAlertMessage(title: kAppName.localized(), message: message , okButton: "OK", controller: self) {
                     removeAppDefaults(key:"AuthToken")
                     appDel.logOut()
-                    //}
                 }
                 else if status == 401{
                     removeAppDefaults(key:"AuthToken")
@@ -213,51 +209,13 @@ class ProfileVC : BaseVC, UITableViewDelegate, UITableViewDataSource {
         return 65
     }
     
+   
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = items[indexPath.row]
         let name = item["name"]
-        if name == ProfileItems.changePassword{
-            let controller = NavigationManager.shared.changePasswordVC
-            controller.textTitle = name?.localized()
-            push(controller: controller)
-            
-        }else if name == ProfileItems.history {
-            
-            let controller = NavigationManager.shared.historyVC
-            push(controller: controller)
-            
-        }else if name == ProfileItems.about {
-            
-            let controller = NavigationManager.shared.aboutVC
-            push(controller: controller)
-            
-        }else if name == ProfileItems.privacyPolicy {
-            
-            let controller = NavigationManager.shared.privacyVC
-            push(controller: controller)
-            
-        }else if name == ProfileItems.termsOfServices {
-            
-            let controller = NavigationManager.shared.serviceVC
-            push(controller: controller)
-            
-        }else if name == ProfileItems.logout {
-            
-            DisplayAlertManager.shared.displayAlertWithNoYes(target: self, animated: true, message: LocalizableConstants.ValidationMessage.confirmLogout.localized()) {
-                
-                //Nothing to handle
-                
-            } handlerYes: {
-                self.logOutApi()
+        name == ProfileItems.changePassword ? navPToChangePassword(name: name) : name == ProfileItems.history ? navPToHistory() : name == ProfileItems.scheduledAppointment ? navPToScheduleAppointment() : name == ProfileItems.about ? navPToAbout() : name == ProfileItems.privacyPolicy ? navPToPrivacyPolicy() : name == ProfileItems.termsOfServices ? navPToTermOfServices() : logOutFromApp()
+ 
 
-//                LoadingManager.shared.showLoading()
-                
-            }
-            
-//            let controller = NavigationManager.shared.logInVC
-//            push(controller: controller)
-            
-        }
     }
     
     //------------------------------------------------------
@@ -281,4 +239,40 @@ class ProfileVC : BaseVC, UITableViewDelegate, UITableViewDataSource {
     }
     
     //------------------------------------------------------
+}
+extension ProfileVC{
+    func navPToChangePassword(name:String?){
+        let controller = NavigationManager.shared.changePasswordVC
+        controller.textTitle = name?.localized()
+        push(controller: controller)
+    }
+    func navPToHistory(){
+        let controller = NavigationManager.shared.historyVC
+        push(controller: controller)
+    }
+    func navPToScheduleAppointment(){
+        let controller = NavigationManager.shared.scheduledAppointmentVC
+        push(controller: controller)
+    }
+    func navPToAbout(){
+        let controller = NavigationManager.shared.aboutVC
+        push(controller: controller)
+    }
+    func navPToPrivacyPolicy(){
+        let controller = NavigationManager.shared.privacyVC
+        push(controller: controller)
+    }
+    func navPToTermOfServices(){
+        let controller = NavigationManager.shared.serviceVC
+        push(controller: controller)
+    }
+    func logOutFromApp(){
+        DisplayAlertManager.shared.displayAlertWithNoYes(target: self, animated: true, message: LocalizableConstants.ValidationMessage.confirmLogout.localized()) {
+            //Nothing to handle
+            
+        } handlerYes: {
+            self.logOutApi()
+            
+        }
+    }
 }

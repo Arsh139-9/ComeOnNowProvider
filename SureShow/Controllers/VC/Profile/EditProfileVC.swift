@@ -163,7 +163,6 @@ class EditProfileVC : BaseVC, UITextViewDelegate, UITextFieldDelegate, ImagePick
                 multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as! String)
             }
             
-            
             for i in 0..<self.imgArray.count{
                 let imageData1 = self.imgArray[i]
                 debugPrint("mime type is\(imageData1.mimeType)")
@@ -175,11 +174,7 @@ class EditProfileVC : BaseVC, UITextViewDelegate, UITextFieldDelegate, ImagePick
                 }else{
                     multipartFormData.append(imageData1, withName: "image" , fileName: ranStr + String(i + 1) + ".jpg", mimeType: imageData1.mimeType)
                 }
-                
-                
-                
             }
-            
             
         }, to: url, usingThreshold: UInt64.init(), method: .post, headers: headers, interceptor: nil, fileManager: .default)
         
@@ -251,6 +246,7 @@ class EditProfileVC : BaseVC, UITextViewDelegate, UITextFieldDelegate, ImagePick
     }
     
     @IBAction func btnSave(_ sender: Any) {
+        
         if validate() == false {
             return
         }

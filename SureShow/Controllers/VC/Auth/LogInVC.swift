@@ -74,15 +74,11 @@ class LogInVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
             if let status = loginResp?.status  {
                 if status == 200{
                     setAppDefaults(loginResp?.access_token, key: "AuthToken")
-                    
-                    //                    showAlertMessage(title: kAppName.localized(), message: message , okButton: "OK", controller: self) {
-                    
                     let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = storyBoard.instantiateViewController(withIdentifier:"TabBarVC") as? TabBarVC
                     if let vc = vc {
                         self.navigationController?.pushViewController(vc, animated: true)
                     }
-                    //}
                 }else{
                     alert(AppAlertTitle.appName.rawValue, message: message, view: self)
                 }
@@ -97,7 +93,7 @@ class LogInVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
         var parameters:[String:AnyObject] = [:]
         parameters["username"] = txtEmail.text  as AnyObject
         parameters["password"] = txtPassword.text  as AnyObject
-        parameters["device_type"] = "1"  as AnyObject
+        parameters["device_type"] = "2"  as AnyObject
         parameters["usertype"] = "2"  as AnyObject
         var deviceToken  = getSAppDefault(key: "DeviceToken") as? String ?? ""
         if deviceToken == ""{
@@ -141,27 +137,10 @@ class LogInVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
         let controller = NavigationManager.shared.forgotPasswordVC
         push(controller: controller)
     }
+   
     
     @IBAction func btnLoginTapped(_ sender: Any) {
-        
-        if validate() == false {
-            return
-        }
-        
-        //            else if isRemember == "0"{
-        //                Alert.present(
-        //                    title: AppAlertTitle.appName.rawValue,
-        //                    message: AppRememberMeAlertMessage.rememberMe,
-        //                    actions: .ok(handler: {
-        //                    }),
-        //                    from: self
-        //                )
-        //            }
-        else{
-            
-            signInApi()
-        }
-        
+        validate() == false ? returnFunc() : signInApi()
     }
     
     @IBAction func btnRemeber(_ sender: Any) {
@@ -169,6 +148,7 @@ class LogInVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
     }
     
     @IBAction func btnEye(_ sender: Any) {
+        
         if(iconClick == true) {
             txtPassword.isSecureTextEntry = false
             eyeIcon.image = UIImage(named: SSImageName.iconEyeShow)

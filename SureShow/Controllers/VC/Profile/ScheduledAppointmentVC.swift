@@ -1,18 +1,20 @@
 //
-//  HistoryVC.swift
+//  ScheduledAppointmentVC.swift
 //  SureShow
 //
-//  Created by Dharmani Apps on 14/09/21.
+//  Created by apple on 08/12/21.
 //
 
 import UIKit
-import Foundation
 
-class HistoryVC : BaseVC, UITableViewDataSource,UITableViewDelegate {
+class ScheduledAppointmentVC:BaseVC,UITableViewDataSource,UITableViewDelegate{
     
-    @IBOutlet weak var tblHistory: UITableView!
+    @IBOutlet weak var tblScheduleAppointment: UITableView!
     var lastPageNo:Int?
-    var appointmentHistoryListArr:[AddAppointmentListData<AnyHashable>]?
+    var appointmentScheduleListArr:[ScheduledAppointmentListData<AnyHashable>]?
+    var getAppointmentTypeListArray:[AppointmentTypeListData<AnyHashable>]?
+
+    
     
     //------------------------------------------------------
     
@@ -33,30 +35,21 @@ class HistoryVC : BaseVC, UITableViewDataSource,UITableViewDelegate {
     //MARK: Customs
     
     func setup() {
-        tblHistory.delegate = self
-        tblHistory.dataSource = self
-        
-        
-        var identifier = String(describing: HistoryTVCell.self)
-        var nibCell = UINib(nibName: identifier, bundle: Bundle.main)
-        tblHistory.register(nibCell, forCellReuseIdentifier: identifier)
-        
-        identifier = String(describing: HomeCancelTVCell.self)
-        nibCell = UINib(nibName: identifier, bundle: Bundle.main)
-        tblHistory.register(nibCell, forCellReuseIdentifier: identifier)
-
-        
-        
+        tblScheduleAppointment.delegate = self
+        tblScheduleAppointment.dataSource = self
+        let identifier = String(describing: ScheduledAppointmentTBCell.self)
+        let nibCell = UINib(nibName: identifier, bundle: Bundle.main)
+        tblScheduleAppointment.register(nibCell, forCellReuseIdentifier: identifier)
     }
-    open func getAppointmentHistoryListsApi(){
+    open func getScheduledAppointmentListsApi(){
         
         DispatchQueue.main.async {
             AFWrapperClass.svprogressHudShow(title:"Loading...", view:self)
         }
-        ModalResponse().getAppointmentHistoryListApi(perPage:9, page: lastPageNo ?? 0){ response in
+        ModalResponse().getScheduledAppointmentListApi(perPage:9, page: lastPageNo ?? 0){ response in
             AFWrapperClass.svprogressHudDismiss(view: self)
             
-            let getAppointmentDataResp  = GetAddAppointmentData(dict:response as? [String : AnyHashable] ?? [:])
+            let getAppointmentDataResp  = GetScheduledAppointmentData(dict:response as? [String : AnyHashable] ?? [:])
             let message = getAppointmentDataResp?.message ?? ""
             if let status = getAppointmentDataResp?.status{
                 if status == 200{
@@ -67,7 +60,7 @@ class HistoryVC : BaseVC, UITableViewDataSource,UITableViewDelegate {
                         DispatchQueue.main.async {
                             //                            self.noDataFoundView.isHidden = true
                         }
-                        var addAppointmentListNUArr = [AddAppointmentListData<AnyHashable>]()
+                        var addAppointmentListNUArr = [ScheduledAppointmentListData<AnyHashable>]()
                         
                         for i in 0..<getAppointmentListArr.count {
                             addAppointmentListNUArr.append(getAppointmentListArr[i])
@@ -77,15 +70,13 @@ class HistoryVC : BaseVC, UITableViewDataSource,UITableViewDelegate {
                         }
                         let uniquePosts = addAppointmentListNUArr.unique{$0.id }
                         
-                        self.appointmentHistoryListArr = uniquePosts
+                        self.appointmentScheduleListArr = uniquePosts
                         
                     }else{
                         DispatchQueue.main.async {
                             //                            self.noDataFoundView.isHidden = false
                         }
                     }
-                    
-                    
                     self.updateUI()
                 }
                 else if status == 401{
@@ -104,8 +95,7 @@ class HistoryVC : BaseVC, UITableViewDataSource,UITableViewDelegate {
         }
     }
     func updateUI() {
-        
-        tblHistory.reloadData()
+        tblScheduleAppointment.reloadData()
     }
     
     //------------------------------------------------------
@@ -115,32 +105,29 @@ class HistoryVC : BaseVC, UITableViewDataSource,UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.appointmentHistoryListArr?.count ?? 0
+        return self.appointmentScheduleListArr?.count ?? 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //        let cell =  (indexPath.section == 0 ? tableView.dequeueReusableCell(withIdentifier: String(describing: HistoryTVCell.self)) as? HistoryTVCell :
-//                        tableView.dequeueReusableCell(withIdentifier: String(describing: HomeCancelTVCell.self)) as? HomeCancelTVCell) ?? UITableViewCell()
-            if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: HistoryTVCell.self)) as? HistoryTVCell {
-                let birthday = getDateFormatter().date(from: appointmentHistoryListArr?[indexPath.row].dob ?? "")
-                let timeInterval = birthday?.timeIntervalSinceNow
-                let age = abs(Int(timeInterval! / 31556926.0))
-                cell.lblAge.text = "\(age) years old"
-                cell.lblName.text = "\(appointmentHistoryListArr?[indexPath.row].last_name ?? "") \(appointmentHistoryListArr?[indexPath.row].first_name ?? "")"
-                cell.lblGender.text =  appointmentHistoryListArr?[indexPath.row].gender  == 1 ? "Male" : appointmentHistoryListArr?[indexPath.row].gender  == 2 ? "Female" : "Others"
-                cell.lblDate.text = appointmentHistoryListArr?[indexPath.row].appoint_date
-                
-                cell.lblTime.text =  appointmentHistoryListArr?[indexPath.row].appoint_start_time ?? "" != "" && appointmentHistoryListArr?[indexPath.row].appoint_end_time ?? "" != "" ? "\(returnFirstWordInString(string:appointmentHistoryListArr?[indexPath.row].appoint_start_time ?? ""))\(getAMPMFromTime(time: Int(appointmentHistoryListArr?[indexPath.row].appoint_start_time ?? "") ?? 0)) - \(returnFirstWordInString(string:appointmentHistoryListArr?[indexPath.row].appoint_end_time ?? ""))\(getAMPMFromTime(time:  Int(appointmentHistoryListArr?[indexPath.row].appoint_end_time ?? "") ?? 0))" : ""
-                
-                cell.imgmain.sd_setImage(with: URL(string:                 appointmentHistoryListArr?[indexPath.row].image.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? ""
-                                                  ), placeholderImage:UIImage(named:"place"))
-                return cell
-            }
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ScheduledAppointmentTBCell.self)) as? ScheduledAppointmentTBCell {
+            cell.lblDate.text = appointmentScheduleListArr?[indexPath.row].appoint_date
+            cell.lblTime.text =  appointmentScheduleListArr?[indexPath.row].appoint_start_time ?? "" != "" && appointmentScheduleListArr?[indexPath.row].appoint_end_time ?? "" != "" ? "\(appointmentScheduleListArr?[indexPath.row].appoint_start_time ?? "") - \(appointmentScheduleListArr?[indexPath.row].appoint_end_time ?? "")" : ""
+            cell.btnType.setTitle(appointmentScheduleListArr?[indexPath.row].patient_type == 1 ? "Adult" : "Child", for: .normal)
+//            appointmentScheduleListArr?[indexPath.row].appointment_type == getAppointmentTypeListArray?[indexPath.row].id ? self.getAppointmentTypeListArray?[indexPath.row].name ?? "" : ""
+            cell.lblAppointmentType.text = appointmentScheduleListArr?[indexPath.row].appointment_type ?? ""
+            cell.lblDisease.text = appointmentScheduleListArr?[indexPath.row].disease
+            cell.lblTitle.text = appointmentScheduleListArr?[indexPath.row].appointment_title
+            cell.lblDescription.text = appointmentScheduleListArr?[indexPath.row].description
+            return cell
+        }
         return UITableViewCell()
     }
-
     
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 190
+        return UITableView.automaticDimension
     }
     
     //------------------------------------------------------
@@ -152,22 +139,32 @@ class HistoryVC : BaseVC, UITableViewDataSource,UITableViewDelegate {
     }
     
     //------------------------------------------------------
-    
+    //MARK: GET APPOINTMENT TYPE
+    @objc func getAppointmentTypes(notification: Notification) {
+        if let userInfo = notification.userInfo {
+            if let appointmentTypeArr = userInfo["appointmentTypes"] as? [AppointmentTypeListData<AnyHashable>] {
+                getAppointmentTypeListArray = appointmentTypeArr
+            }
+        }
+    }
     //MARK: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(getAppointmentTypes(notification:)), name:NSNotification.Name(rawValue: "SendAppointmentType"), object: nil)
+
+
         setup()
-        tblHistory.separatorStyle = .none
-        tblHistory.separatorColor = .clear
+        tblScheduleAppointment.separatorStyle = .none
+        tblScheduleAppointment.separatorColor = .clear
     }
-    
+   
     //------------------------------------------------------
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         lastPageNo = 1
-        getAppointmentHistoryListsApi()
+        getScheduledAppointmentListsApi()
     }
     
     //------------------------------------------------------

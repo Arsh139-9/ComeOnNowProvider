@@ -124,14 +124,14 @@ class HomeVC : BaseVC, UITableViewDataSource, UITableViewDelegate, SegmentViewDe
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if segment1.isSelected == true{
-            let controller = NavigationManager.shared.appointmentShowVC
-            push(controller: controller)
-            
-        }else {
+//        if segment1.isSelected == true{
+//            let controller = NavigationManager.shared.appointmentShowVC
+//            push(controller: controller)
+//
+//        }else {
             let controller = NavigationManager.shared.appointmentDetailsVC
             push(controller: controller)
-        }
+        //}
     }
     
     //------------------------------------------------------

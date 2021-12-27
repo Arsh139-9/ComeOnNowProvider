@@ -21,24 +21,21 @@ let appScene = (UIApplication.shared.delegate as! SceneDelegate)
 struct WSMethods {
     static let signIn = "user/login"
     static let signUp = "user/signup"
-    static let addchildren = "addchildren.php"
-    static let getChildrenDetails = "getChildrenDetails.php"
+    static let getDiseaseList = "queue/disease-list"
+    static let getAppointmentList = "providerappointment/appointment"
+    static let getAppointmentHistoryList = "providerappointment/appointment-history"
+    static let getAppointmentScheduleList = "providerappointment/schedule-appointment"
+    static let getAppointmentTypesList = "providerappointment/appointmenttype-list"
+    static let getProviderList = "queue/provider-list"
+    static let getPatientList = "providerappointment/patient-list"
+    static let getClinicList = "queue/clinic-list"
+    static let getBranchList = "queue/branch-list"
+    static let addGetQueueList = "providerappointment/queue"
+    static let getNotificationList = "user/get-notification-list"
     static let getProfileDetails = "getProfileDetails.php"
     static let changePassword = "user/changepassword"
     static let resentVerficationEmail = "ResentVerficationEmail.php"
-    static let addBiWeeklyInventory = "AddBiWeeklyInventory.php"
-    static let getAllProduct = "GetAllProduct.php"
-    static let addProduct = "AddProduct.php"
-    static let getAllIngredient = "GetAllIngredient.php"
-    static let getAllIngredientList = "GetAllIngredientList.php"
-    static let getListOfItem = "GetListOfItem.php"
-    static let addIngredient = "AddIngredient.php"
-    static let addIngredientProductDetail = "AddIngredientProductDetail.php"
-    static let addMaping = "AddMaping.php"
-    static let matchMappingUnit = "MatchMappingUnit.php"
-    static let getAllBuildOrderDetail = "GetAllBuildOrderDetail.php"
-    static let addBuildOrder = "AddBuildOrder.php"
-    static let getNotificationDetailById = "GetNotificationDetailById.php"
+    
     
     
     static let logOut = "user/logout"
@@ -52,12 +49,12 @@ struct WSMethods {
 let WS_Live = ""
 let WS_Staging = "https://comeonnow.io/come_on_now/api/v1/"
 
-let kBASEURL = WS_Staging
+let kBASEURL = "https://comeonnow.io/come_on_now/api/v1/"
 
 struct SettingWebLinks {
-    static let privacyPolicy = "PrivacyAndPolicy.html"
-    static let aboutUs = "about.html"
-    static let termsAndConditions = "terms&services.html"
+    static let privacyPolicy = "https://www.comeonnow.io/v2/webservice/PrivacyAndPolicy.html"
+    static let aboutUs = "https://www.comeonnow.io/v2/webservice/about.html"
+    static let termsAndConditions = "https://www.comeonnow.io/v2/webservice/terms&services.html"
 }
 struct NavBarTitle {
     static let privacyPolicy = "Privacy policy"

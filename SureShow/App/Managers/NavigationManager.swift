@@ -98,6 +98,9 @@ class NavigationManager: NSObject {
     public var historyVC: HistoryVC {
         return mainStoryboard.instantiateViewController(withIdentifier: String(describing: HistoryVC.self)) as! HistoryVC
     }
+    public var scheduledAppointmentVC: ScheduledAppointmentVC {
+        return mainStoryboard.instantiateViewController(withIdentifier: String(describing: ScheduledAppointmentVC.self)) as! ScheduledAppointmentVC
+    }
     public var aboutVC: AboutVC {
         return mainStoryboard.instantiateViewController(withIdentifier: String(describing: AboutVC.self)) as! AboutVC
     }
@@ -111,9 +114,7 @@ class NavigationManager: NSObject {
     public var appointmentDetailsVC: AppointmentDetailsVC {
         return mainStoryboard.instantiateViewController(withIdentifier: String(describing: AppointmentDetailsVC.self)) as! AppointmentDetailsVC
     }
-    public var appointmentShowVC: AppointmentShowVC {
-        return mainStoryboard.instantiateViewController(withIdentifier: String(describing: AppointmentShowVC.self)) as! AppointmentShowVC
-    }
+   
     
  
     

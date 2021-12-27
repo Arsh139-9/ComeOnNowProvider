@@ -208,6 +208,7 @@ extension UIView {
 //MARK:  String
 
 extension String {
+   
     
     public func toTrim() -> String {
         return self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
@@ -307,6 +308,29 @@ extension UIView {
     }
 }
 extension UIViewController {
+   
+    func getDateFormatter() -> DateFormatter{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-YYYY"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        return formatter
+    }
+    
+    func returnFirstWordInString(string:String) -> String{
+        var fStr = String()
+        if let spaceIndex = string.firstIndex(of: " ") {
+            fStr = String(string.prefix(upTo: string.index(after: spaceIndex)))
+        }
+        return fStr
+    }
+    
+    func getAMPMFromTime(time:Int)->String{
+        if time > 12{
+            return ":00 PM"
+        }else{
+            return ":00 AM"
+        }
+    }
     func convertTimeStampToDate(dateVal : Double) -> String{
         let timeinterval = TimeInterval(dateVal)
         let dateFromServer = Date(timeIntervalSince1970:timeinterval)
@@ -331,7 +355,20 @@ extension UIImageView {
     }
 }
 
-
+extension Array {
+    func unique<T:Hashable>(map: ((Element) -> (T)))  -> [Element] {
+        var set = Set<T>() //the unique list kept in a Set for fast retrieval
+        var arrayOrdered = [Element]() //keeping the unique list of elements but ordered
+        for value in self {
+            if !set.contains(map(value)) {
+                set.insert(map(value))
+                arrayOrdered.append(value)
+            }
+        }
+        
+        return arrayOrdered
+    }
+}
 extension UIImageView {
     public func roundCornersLeft(_ corners: UIRectCorner, radius: CGFloat) {
         let maskPath = UIBezierPath(roundedRect: bounds,
@@ -341,4 +378,43 @@ extension UIImageView {
         shape.path = maskPath.cgPath
         layer.mask = shape
     }
+}
+extension UIViewController{
+    func returnAge(birthday:Date?) -> Int{
+        let timeInterval = birthday?.timeIntervalSinceNow
+        let age = abs(Int(timeInterval! / 31556926.0))
+        return age
+    }
+    func returnFunc(){
+        return
+    }
+}
+extension UITextField {
+    
+    //MARK:- Set Image on the right of text fields
+    
+    func setupRightImage(imageName:String){
+        let imageView = UIImageView(frame: CGRect(x: 10, y: 7, width: 15, height: 20))
+        imageView.image = UIImage(named: imageName)
+        imageView.contentMode = .scaleAspectFit
+        let imageContainerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 43, height: 33))
+        imageContainerView.addSubview(imageView)
+        rightView = imageContainerView
+        rightViewMode = .always
+        self.tintColor = .lightGray
+    }
+    
+    //MARK:- Set Image on left of text fields
+    
+    func setupLeftImage(imageName:String){
+        let imageView = UIImageView(frame: CGRect(x: 10, y: 10, width: 20, height: 20))
+        imageView.image = UIImage(named: imageName)
+        imageView.contentMode = .scaleAspectFit
+        let imageContainerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 55, height: 40))
+        imageContainerView.addSubview(imageView)
+        leftView = imageContainerView
+        leftViewMode = .always
+        self.tintColor = .lightGray
+    }
+    
 }

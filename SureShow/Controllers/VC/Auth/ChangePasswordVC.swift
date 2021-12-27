@@ -117,7 +117,6 @@ class ChangePasswordVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
             if let status = response["status"] as? Int {
                 if status == 200{
                     showAlertMessage(title: kAppName.localized(), message: message , okButton: "OK", controller: self) {
-                        
                         self.navigationController?.popViewController(animated: true)
                     }
                 }
@@ -140,13 +139,6 @@ class ChangePasswordVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
         parameters["password"] = txtNewPassword.text  as AnyObject
         parameters["old_password"] = txtOldPassword.text  as AnyObject
         parameters["usertype"] = "2"  as AnyObject
-
-        //        parameters["device_type"] = "1"  as AnyObject
-        //        var deviceToken  = getSAppDefault(key: "DeviceToken") as? String ?? ""
-        //        if deviceToken == ""{
-        //            deviceToken = "123"
-        //        }
-        //        parameters["device_token"] = deviceToken  as AnyObject
         print(parameters)
         return parameters
     }
@@ -159,12 +151,7 @@ class ChangePasswordVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
     }
     
     @IBAction func btnSave(_ sender: Any) {
-        if validate() == false {
-            return
-        }
-        else{
-            changePasswordApi()
-        }
+        validate() == false ? returnFunc() : changePasswordApi()
     }
     
     //------------------------------------------------------
@@ -172,7 +159,6 @@ class ChangePasswordVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
     //MARK: UITextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         if IQKeyboardManager.shared.canGoNext {
             IQKeyboardManager.shared.goNext()
         } else {

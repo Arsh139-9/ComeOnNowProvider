@@ -79,7 +79,7 @@ class ForgotPasswordVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
         var parameters:[String:AnyObject] = [:]
         parameters["username"] = txtEmail.text  as AnyObject
         parameters["usertype"] = "2"  as AnyObject
-
+        
         print(parameters)
         return parameters
     }
@@ -88,12 +88,7 @@ class ForgotPasswordVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
     //MARK: Actions
     
     @IBAction func btnSubmit(_ sender: Any) {
-        if validate() == false {
-            return
-        }
-        else{
-            forgotPasswordApi()
-        }
+        validate() == false ? returnFunc() : forgotPasswordApi()
     }
     
     @IBAction func btnBack(_ sender: Any) {

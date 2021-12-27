@@ -14,6 +14,22 @@ import SVProgressHUD
 
 class AFWrapperClass{
     
+    @available(iOS 15.0.0, *)
+    class func afAsyncAwaitRequest(url: URL) async throws -> Data {
+        try await withUnsafeThrowingContinuation { continuation in
+            AF.request(url, method: .get).validate().responseData { response in
+                if let data = response.data {
+                    continuation.resume(returning: data)
+                    return
+                }
+                if let err = response.error {
+                    continuation.resume(throwing: err)
+                    return
+                }
+                fatalError("Error while doing Alamofire url request")
+            }
+        }
+    }
     
     class func requestPOSTURL(_ strURL : String, params : Parameters,headers : HTTPHeaders?, success:@escaping (NSDictionary) -> Void, failure:@escaping (NSError) -> Void){
         let urlwithPercentEscapes = strURL.addingPercentEncoding( withAllowedCharacters: CharacterSet.urlQueryAllowed)

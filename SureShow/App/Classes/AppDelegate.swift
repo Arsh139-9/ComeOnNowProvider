@@ -10,16 +10,18 @@ import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     
     static var shared: AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
-
+    
     //------------------------------------------------------
     
     //MARK: Customs
+    
+    
     
     /// keyboard configutation
     private func configureKeboard() {
@@ -28,15 +30,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         IQKeyboardManager.shared.toolbarTintColor = SSColor.appBlack
         IQKeyboardManager.shared.enableAutoToolbar = true
-//        IQKeyboardManager.shared.disabledDistanceHandlingClasses = [ChatDetailsVC.self, ChatViewController.self]
+        //        IQKeyboardManager.shared.disabledDistanceHandlingClasses = [ChatDetailsVC.self, ChatViewController.self]
         IQKeyboardManager.shared.toolbarPreviousNextAllowedClasses = [UIScrollView.self,UIView.self,UITextField.self,UITextView.self,UIStackView.self]
         
     }
     
     /// to get custom added font names
     private func getCustomFontDetails() {
-
-        #if DEBUG
+        
+#if DEBUG
         for family in UIFont.familyNames {
             let sName: String = family as String
             debugPrint("family: \(sName)")
@@ -44,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 debugPrint("name: \(name as String)")
             }
         }
-        #endif
+#endif
     }
     public func configureNavigationBar() {
         
@@ -65,15 +67,104 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UINavigationBar.appearance().isTranslucent = false
         }
     }
-
+    func registerRemoteNotificaton(_ application: UIApplication) {
+        
+        if #available(iOS 10.0, *) {
+            
+            UNUserNotificationCenter.current().delegate = self
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+            
+        } else {
+            
+            let settings: UIUserNotificationSettings =
+            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+    }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        window = UIWindow(frame: UIScreen.main.bounds)
+        sleep(1)
 
+        window = UIWindow(frame: UIScreen.main.bounds)
+        registerRemoteNotificaton(application)
+        
+        
+        if launchOptions != nil
+        {
+            // opened from a push notification when the app is closed
+            let userInfo = launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] as? [AnyHashable : Any]
+            if (userInfo != nil){
+                if let apnsData = userInfo?["aps"] as? [String:Any]{
+                    if let dataObj = apnsData["data"] as? [String:Any]{
+                        let notificationType = dataObj["type"] as? String
+                        let state = UIApplication.shared.applicationState
+                        if state != .active{
+                            
+                            if notificationType == "add_queue"{
+                                let storyBoard = UIStoryboard.init(name:StoryboardName.Main, bundle: nil)
+                                let rootVc = storyBoard.instantiateViewController(withIdentifier:"TabBarVC") as! TabBarVC
+                                rootVc.selectedIndex = 1
+                                
+                                
+                                let nav =  UINavigationController(rootViewController: rootVc)
+                                nav.isNavigationBarHidden = true
+                                if #available(iOS 13.0, *){
+                                    if let scene = UIApplication.shared.connectedScenes.first{
+                                        let windowScene = (scene as? UIWindowScene)
+                                        print(">>> windowScene: \(windowScene)")
+                                        let window: UIWindow = UIWindow(frame: (windowScene?.coordinateSpace.bounds)!)
+                                        window.windowScene = windowScene //Make sure to do this
+                                        window.rootViewController = nav
+                                        window.makeKeyAndVisible()
+                                        self.window = window
+                                    }
+                                } else {
+                                    self.window?.rootViewController = nav
+                                    self.window?.makeKeyAndVisible()
+                                }
+                            }
+                            else {
+                                let storyBoard = UIStoryboard.init(name:StoryboardName.Main, bundle: nil)
+                                let rootVc = storyBoard.instantiateViewController(withIdentifier:"TabBarVC") as! TabBarVC
+                                rootVc.selectedIndex = 2
+                                
+                                
+                                let nav =  UINavigationController(rootViewController: rootVc)
+                                nav.isNavigationBarHidden = true
+                                if #available(iOS 13.0, *){
+                                    if let scene = UIApplication.shared.connectedScenes.first{
+                                        let windowScene = (scene as? UIWindowScene)
+                                        print(">>> windowScene: \(windowScene)")
+                                        let window: UIWindow = UIWindow(frame: (windowScene?.coordinateSpace.bounds)!)
+                                        window.windowScene = windowScene //Make sure to do this
+                                        window.rootViewController = nav
+                                        window.makeKeyAndVisible()
+                                        self.window = window
+                                    }
+                                } else {
+                                    self.window?.rootViewController = nav
+                                    self.window?.makeKeyAndVisible()
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            
+        }
+        
+        
         configureKeboard()
         getCustomFontDetails()
         configureNavigationBar()
-//        chekLoggedUser()
-//        registerRemoteNotificaton(application)
+        //        chekLoggedUser()
+        //        registerRemoteNotificaton(application)
         //RealmManager.shared.save(channelDownload: false)
         window?.tintColor = SSColor.appBlack
         UITabBar.appearance().tintColor = #colorLiteral(red: 0.391271323, green: 0.1100022718, blue: 0.353789866, alpha: 1)
@@ -108,21 +199,130 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         return .portrait
     }
-
+    
     // MARK: UISceneSession Lifecycle
-
+    
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
-
+    
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
+    
+    
 }
 
+extension AppDelegate:UNUserNotificationCenterDelegate{
+    
+    // Receive displayed notifications for iOS 10 devices.
+    
+    
+    
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        if let userInfo = notification.request.content.userInfo as? [String:Any]{
+            print(userInfo)
+            if let apnsData = userInfo["aps"] as? [String:Any]{
+                if let dataObj = apnsData["data"] as? [String:Any]{
+                    let notificationType = dataObj["notification_type"] as? String
+                    let state = UIApplication.shared.applicationState
+                }
+            }
+        }
+        
+        
+        
+        
+        // Print full message.
+        //        print("user info is \(userInfo)")
+        
+        // Change this to your preferred presentation option
+        // completionHandler([])
+        //Show Push notification in foreground
+        //        completionHandler([.alert, .badge, .sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        if let userInfo = response.notification.request.content.userInfo as? [String:Any]{
+            print(userInfo)
+            if let apnsData = userInfo["aps"] as? [String:Any]{
+                if let dataObj = apnsData["data"] as? [String:Any]{
+                    let notificationType = dataObj["type"] as? String
+                    
+                    let state = UIApplication.shared.applicationState
+                    if state != .active{
+                        
+                        if notificationType == "add_queue"{
+                            let storyBoard = UIStoryboard.init(name:StoryboardName.Main, bundle: nil)
+                            let rootVc = storyBoard.instantiateViewController(withIdentifier:"TabBarVC") as! TabBarVC
+                            rootVc.selectedIndex = 1
+                            
+                            
+                            let nav =  UINavigationController(rootViewController: rootVc)
+                            nav.isNavigationBarHidden = true
+                            if #available(iOS 13.0, *){
+                                if let scene = UIApplication.shared.connectedScenes.first{
+                                    guard let windowScene = (scene as? UIWindowScene) else { return }
+                                    print(">>> windowScene: \(windowScene)")
+                                    let window: UIWindow = UIWindow(frame: windowScene.coordinateSpace.bounds)
+                                    window.windowScene = windowScene //Make sure to do this
+                                    window.rootViewController = nav
+                                    window.makeKeyAndVisible()
+                                    self.window = window
+                                }
+                            } else {
+                                self.window?.rootViewController = nav
+                                self.window?.makeKeyAndVisible()
+                            }
+                        }
+                        else {
+                            let storyBoard = UIStoryboard.init(name:StoryboardName.Main, bundle: nil)
+                            let rootVc = storyBoard.instantiateViewController(withIdentifier:"TabBarVC") as! TabBarVC
+                            rootVc.selectedIndex = 2
+                            
+                            
+                            let nav =  UINavigationController(rootViewController: rootVc)
+                            nav.isNavigationBarHidden = true
+                            if #available(iOS 13.0, *){
+                                if let scene = UIApplication.shared.connectedScenes.first{
+                                    guard let windowScene = (scene as? UIWindowScene) else { return }
+                                    print(">>> windowScene: \(windowScene)")
+                                    let window: UIWindow = UIWindow(frame: windowScene.coordinateSpace.bounds)
+                                    window.windowScene = windowScene //Make sure to do this
+                                    window.rootViewController = nav
+                                    window.makeKeyAndVisible()
+                                    self.window = window
+                                }
+                            } else {
+                                self.window?.rootViewController = nav
+                                self.window?.makeKeyAndVisible()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        completionHandler()
+    }
+    
+    func convertStringToDictionary(json: String) -> [String: AnyObject]? {
+        if let data = json.data(using: String.Encoding.utf8) {
+            let json = try? JSONSerialization.jsonObject(with: data, options:.mutableContainers) as? [String: AnyObject]
+            //            if let error = error {
+            //            print(error!)
+            //}
+            return json!
+        }
+        return nil
+    }
+    
+}
