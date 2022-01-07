@@ -155,7 +155,7 @@ struct LocalizableConstants {
         }
         struct SureShow {
             
-            static let title = "sureshow"
+            static let title = "Come On Now! Provider"
             static let pending = "pending"
             static let confirmed = "confirmed"
             static let cancel = "cancel"

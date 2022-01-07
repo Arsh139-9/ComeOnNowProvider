@@ -418,3 +418,18 @@ extension UITextField {
     }
     
 }
+class RemoveBlinkCursor: UITextField {
+    override init(frame:CGRect)
+    {
+        super.init(frame:frame)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+    }
+
+     func caretRectForPosition(position: UITextPosition!) -> CGRect {
+        return .zero
+    }
+}
+

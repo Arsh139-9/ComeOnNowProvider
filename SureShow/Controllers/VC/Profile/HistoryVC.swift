@@ -11,6 +11,9 @@ import Foundation
 class HistoryVC : BaseVC, UITableViewDataSource,UITableViewDelegate {
     
     @IBOutlet weak var tblHistory: UITableView!
+    @IBOutlet weak var noHistoryFoundPopUpView: UIView!
+    
+    
     var lastPageNo:Int?
     var appointmentHistoryListArr:[AddAppointmentListData<AnyHashable>]?
     
@@ -53,7 +56,7 @@ class HistoryVC : BaseVC, UITableViewDataSource,UITableViewDelegate {
         DispatchQueue.main.async {
             AFWrapperClass.svprogressHudShow(title:"Loading...", view:self)
         }
-        ModalResponse().getAppointmentHistoryListApi(perPage:9, page: lastPageNo ?? 0){ response in
+        ModalResponse().getAppointmentHistoryListApi(perPage:5000, page: lastPageNo ?? 0){ response in
             AFWrapperClass.svprogressHudDismiss(view: self)
             
             let getAppointmentDataResp  = GetAddAppointmentData(dict:response as? [String : AnyHashable] ?? [:])
@@ -92,7 +95,8 @@ class HistoryVC : BaseVC, UITableViewDataSource,UITableViewDelegate {
                     removeAppDefaults(key:"AuthToken")
                     appDel.logOut()
                 }else{
-                    alert(AppAlertTitle.appName.rawValue, message: message, view: self)
+                    self.noHistoryFoundPopUpView.isHidden = false
+
                     
                 }
                 
@@ -129,10 +133,10 @@ class HistoryVC : BaseVC, UITableViewDataSource,UITableViewDelegate {
                 cell.lblGender.text =  appointmentHistoryListArr?[indexPath.row].gender  == 1 ? "Male" : appointmentHistoryListArr?[indexPath.row].gender  == 2 ? "Female" : "Others"
                 cell.lblDate.text = appointmentHistoryListArr?[indexPath.row].appoint_date
                 
-                cell.lblTime.text =  appointmentHistoryListArr?[indexPath.row].appoint_start_time ?? "" != "" && appointmentHistoryListArr?[indexPath.row].appoint_end_time ?? "" != "" ? "\(returnFirstWordInString(string:appointmentHistoryListArr?[indexPath.row].appoint_start_time ?? ""))\(getAMPMFromTime(time: Int(appointmentHistoryListArr?[indexPath.row].appoint_start_time ?? "") ?? 0)) - \(returnFirstWordInString(string:appointmentHistoryListArr?[indexPath.row].appoint_end_time ?? ""))\(getAMPMFromTime(time:  Int(appointmentHistoryListArr?[indexPath.row].appoint_end_time ?? "") ?? 0))" : ""
+                cell.lblTime.text =  appointmentHistoryListArr?[indexPath.row].appoint_start_time ?? "" != "" && appointmentHistoryListArr?[indexPath.row].appoint_end_time ?? "" != "" ? "\(appointmentHistoryListArr?[indexPath.row].appoint_start_time ?? "") - \(appointmentHistoryListArr?[indexPath.row].appoint_end_time ?? "")" : ""
                 
                 cell.imgmain.sd_setImage(with: URL(string:                 appointmentHistoryListArr?[indexPath.row].image.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? ""
-                                                  ), placeholderImage:UIImage(named:"place"))
+                                                  ), placeholderImage:UIImage(named:"placeholderProfileImg"))
                 return cell
             }
         return UITableViewCell()
@@ -166,6 +170,7 @@ class HistoryVC : BaseVC, UITableViewDataSource,UITableViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        noHistoryFoundPopUpView.isHidden = true
         lastPageNo = 1
         getAppointmentHistoryListsApi()
     }

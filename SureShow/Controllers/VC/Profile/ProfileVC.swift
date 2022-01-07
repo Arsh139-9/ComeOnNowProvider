@@ -122,7 +122,7 @@ class ProfileVC : BaseVC, UITableViewDelegate, UITableViewDataSource {
                         self.emailLbl.text = self.getProfileResp?.email ?? ""
                         var sPhotoStr = self.getProfileResp?.image ?? ""
                         sPhotoStr = sPhotoStr.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? ""
-                        self.imgProfile.sd_setImage(with: URL(string: sPhotoStr ), placeholderImage:UIImage(named:"place"))
+                        self.imgProfile.sd_setImage(with: URL(string: sPhotoStr ), placeholderImage:UIImage(named:"placeholderProfileImg"))
                     }
                  
                 }

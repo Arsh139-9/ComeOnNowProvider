@@ -9,9 +9,13 @@ import UIKit
 import Foundation
 import IQKeyboardManagerSwift
 import Alamofire
+import Lottie
 
 class ChangePasswordVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
     
+    @IBOutlet weak var cPImgView: UIImageView!
+    @IBOutlet weak var nextPasswordImgView: UIImageView!
+    @IBOutlet weak var confirmPasswordImgView: UIImageView!
     @IBOutlet weak var confirmPswrdView: UIView!
     @IBOutlet weak var newPswrdView: UIView!
     @IBOutlet weak var chngPswrdView: UIView!
@@ -145,6 +149,17 @@ class ChangePasswordVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
     //------------------------------------------------------
     
     //MARK: Actions
+ 
+    @IBAction func hideShowPasswordBtnAction(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if sender.tag == 0{
+            sender.isSelected ? oldPasswordEncrypt() : oldPasswordDecrypt()
+        }else if sender.tag == 1{
+            sender.isSelected ? newPasswordEncrypt() : newPasswordDecrypt()
+        }else if sender.tag == 2{
+            sender.isSelected ? confirmPasswordEncrypt() :confirmPasswordDecrypt()
+        }
+    }
     
     @IBAction func btnBack(_ sender: Any) {
         self.pop()
@@ -210,4 +225,23 @@ class ChangePasswordVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
     //------------------------------------------------------
 }
 
-
+extension ChangePasswordVC{
+    func oldPasswordEncrypt(){
+        txtOldPassword.isSecureTextEntry = false;cPImgView.image = UIImage(named: SSImageName.iconEyeShow)
+    }
+    func newPasswordEncrypt(){
+        txtNewPassword.isSecureTextEntry = false;nextPasswordImgView.image = UIImage(named: SSImageName.iconEyeShow)
+    }
+    func confirmPasswordEncrypt(){
+        txtConfirmPassword.isSecureTextEntry = false;confirmPasswordImgView.image = UIImage(named: SSImageName.iconEyeShow)
+    }
+    func oldPasswordDecrypt(){
+        txtOldPassword.isSecureTextEntry = true;cPImgView.image = UIImage(named: SSImageName.iconEye)
+    }
+    func newPasswordDecrypt(){
+        txtNewPassword.isSecureTextEntry = true;nextPasswordImgView.image = UIImage(named: SSImageName.iconEye)
+    }
+    func confirmPasswordDecrypt(){
+        txtConfirmPassword.isSecureTextEntry = true;confirmPasswordImgView.image = UIImage(named: SSImageName.iconEye)
+    }
+}

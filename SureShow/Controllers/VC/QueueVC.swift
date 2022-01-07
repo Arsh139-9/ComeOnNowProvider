@@ -12,9 +12,13 @@ import KRPullLoader
 class QueueVC: UIViewController {
     
     @IBOutlet weak var tblQueue: UITableView!
+    @IBOutlet weak var queueNotFoundPopUpView: UIView!
+    
+    
     var addQueueListArr:[AddAppointmentListData<AnyHashable>]?
-    var lastPageNo:Int?
+    var lastPageNo = 0
     var hospitalListArr = [HospitalListData<AnyHashable>]()
+    var addQueueListNUArr = [AddAppointmentListData<AnyHashable>]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +32,7 @@ class QueueVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        queueNotFoundPopUpView.isHidden = true
         lastPageNo = 1
         getQueueListsApi()
     }
@@ -41,7 +46,7 @@ class QueueVC: UIViewController {
         DispatchQueue.main.async {
             AFWrapperClass.svprogressHudShow(title:"Loading...", view:self)
         }
-        ModalResponse().getAppointmentListApi(perPage:9, page: lastPageNo ?? 0, status: 1){ response in
+        ModalResponse().getAppointmentListApi(perPage:5000, page: lastPageNo , status: 1){ response in
             AFWrapperClass.svprogressHudDismiss(view: self)
             print(response)
             
@@ -49,22 +54,21 @@ class QueueVC: UIViewController {
             let message = getQueueDataResp?.message ?? ""
             if let status = getQueueDataResp?.status{
                 if status == 200{
-                    self.lastPageNo = self.lastPageNo ?? 0 + 1
+                    self.lastPageNo = self.lastPageNo + 1
                     let getQueueListArr = getQueueDataResp?.addAppointmentListArray ?? []
                     
                     if getQueueListArr.count != 0{
                         DispatchQueue.main.async {
                             //                            self.noDataFoundView.isHidden = true
                         }
-                        var addQueueListNUArr = [AddAppointmentListData<AnyHashable>]()
                         
                         for i in 0..<getQueueListArr.count {
-                            addQueueListNUArr.append(getQueueListArr[i])
+                            self.addQueueListNUArr.append(getQueueListArr[i])
                         }
-                        addQueueListNUArr.sort {
+                        self.addQueueListNUArr.sort {
                             $0.id > $1.id
                         }
-                        let uniquePosts = addQueueListNUArr.unique{$0.id }
+                        let uniquePosts = self.addQueueListNUArr.unique{$0.id}
                         self.addQueueListArr = uniquePosts
                     }else{
                         DispatchQueue.main.async {
@@ -77,7 +81,7 @@ class QueueVC: UIViewController {
                     removeAppDefaults(key:"AuthToken")
                     appDel.logOut()
                 }else{
-                    alert(AppAlertTitle.appName.rawValue, message: message, view: self)
+                    self.queueNotFoundPopUpView.isHidden = self.addQueueListArr?.count ?? 0 == 0 ? false : true
                     
                 }
                 
@@ -111,6 +115,7 @@ class QueueVC: UIViewController {
             alert(AppAlertTitle.appName.rawValue, message: error.localizedDescription, view: self)
         }
     }
+    
     @IBAction func btnAdd(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddQueueVC") as! AddQueueVC
         vc.globalPickerView = UIPickerView()

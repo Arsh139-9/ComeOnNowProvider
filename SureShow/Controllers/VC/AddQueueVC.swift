@@ -9,15 +9,18 @@ import UIKit
 import Foundation
 import IQKeyboardManagerSwift
 
+
+
+
 class AddQueueVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
     
     @IBOutlet weak var nameView: UIView!
-    @IBOutlet weak var txtName: SSUserNameDropDownTextField!
-    @IBOutlet weak var txtBirthDate: SSBirthDateTextField!
-    @IBOutlet weak var txtGender: SSGenderTextField!
+    @IBOutlet weak var txtName:UITextField!
+    @IBOutlet weak var txtBirthDate: UITextField!
+    @IBOutlet weak var txtGender: UITextField!
     @IBOutlet weak var txtHospitalName: UITextField!
     @IBOutlet weak var txtProvider: UITextField!
-    @IBOutlet weak var txtDisease: SSDiseaseTextField!
+    @IBOutlet weak var txtDisease: UITextField!
     @IBOutlet weak var txtBranch: UITextField!
     @IBOutlet weak var birthView: UIView!
     @IBOutlet weak var diseaseView: UIView!
@@ -37,7 +40,6 @@ class AddQueueVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
     var patientSId:Int?
     var providerSId:Int?
     var diseaseSId:Int?
-    
     var globalPickerView:UIPickerView?
     
     
@@ -56,6 +58,7 @@ class AddQueueVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
     deinit { //same like dealloc in ObjectiveC
         
     }
+  
     
     //------------------------------------------------------
     
@@ -69,6 +72,9 @@ class AddQueueVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
         returnKeyHandler?.delegate = self
         
         txtName.delegate = self
+        txtName.tintColor = .clear
+        txtHospitalName.tintColor = .clear
+
         txtBirthDate.delegate = self
         txtGender.delegate = self
         txtDisease.delegate = self
@@ -79,7 +85,6 @@ class AddQueueVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
         globalPickerView?.dataSource = self
         
         let label = UILabel(frame: CGRect(x:0, y:0, width:300, height:19))
-        //        label.text = kAppName
         label.center = CGPoint(x: view.frame.midX, y: view.frame.height)
         label.textAlignment = NSTextAlignment.center
         
@@ -92,18 +97,14 @@ class AddQueueVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
         toolBar.setItems([cancelButton, toolbarTitle, doneButton], animated: false)
         
-        //        let buttons = [barButtonItem1, barButtonItem,barButtonItem2]
-        //        toolBar.setItems(buttons, animated: false)
+     
         txtName.inputView = globalPickerView
         txtName.inputAccessoryView = toolBar
         
         txtHospitalName.inputView = globalPickerView
         txtHospitalName.inputAccessoryView = toolBar
         
-        txtBranch.inputView = globalPickerView
         txtBranch.inputAccessoryView = toolBar
-        
-        txtProvider.inputView = globalPickerView
         txtProvider.inputAccessoryView = toolBar
         
         txtDisease.inputView = globalPickerView
@@ -151,6 +152,12 @@ class AddQueueVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
             }
             return false
         }
+        if ValidationManager.shared.isEmpty(text: txtBranch.text) == true {
+            showAlertMessage(title: kAppName.localized(), message: "Please select branch" , okButton: "Ok", controller: self) {
+                
+            }
+            return false
+        }
         if ValidationManager.shared.isEmpty(text: txtProvider.text) == true {
             showAlertMessage(title: kAppName.localized(), message: "Please select provider" , okButton: "Ok", controller: self) {
                 
@@ -158,7 +165,7 @@ class AddQueueVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
             return false
         }
         if ValidationManager.shared.isEmpty(text: txtDisease.text) == true {
-            showAlertMessage(title: kAppName.localized(), message: "Please select disease name." , okButton: "Ok", controller: self) {
+            showAlertMessage(title: kAppName.localized(), message: "Please select disease." , okButton: "Ok", controller: self) {
                 
             }
             return false
@@ -174,11 +181,11 @@ class AddQueueVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
             if let status = getPatientDataResp?.status{
                 if status == 200{
                     self.patientListArr = getPatientDataResp?.patientListArray ?? []
-                    self.pvOptionArr.removeAll()
-                    for obj in self.patientListArr {
-                        self.pvOptionArr.append("\(obj.last_name) \(obj.first_name)")
-                    }
-                    self.txtName.pvOptions = self.pvOptionArr
+//                    self.pvOptionArr.removeAll()
+//                    for obj in self.patientListArr {
+//                        self.pvOptionArr.append("\(obj.last_name) \(obj.first_name)")
+//                    }
+//                    self.txtName.pvOptions = self.pvOptionArr
                 }
                 else if status == 401{
                     removeAppDefaults(key:"AuthToken")
@@ -204,6 +211,7 @@ class AddQueueVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
             if let status = getDiseaseDataResp?.status{
                 if status == 200{
                     self.diseaseListArr = getDiseaseDataResp?.diseaseListArray ?? []
+
                 }
                 else if status == 401{
                     removeAppDefaults(key:"AuthToken")
@@ -259,7 +267,6 @@ class AddQueueVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
                 break
             }
         }
-        
         ModalResponse().getProviderListApi(clinicId:hospitalId ?? 0, branchId: branchId ?? 0){ response in
             print(response)
             let getProviderDataResp  = GetProviderData(dict:response as? [String : AnyHashable] ?? [:])
@@ -352,11 +359,24 @@ class AddQueueVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
         }
         return true
     }
-    
+     func caretRect(for position: UITextPosition) -> CGRect {
+        return .zero
+      }
+      
+       func selectionRects(for range: UITextRange) -> [UITextSelectionRect] {
+        return []
+      }
+      
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        return false
+      }
     
     
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.tintColor = .clear
+        
+        globalPickerView?.reloadAllComponents()
         switch textField {
         case txtName:
             nameView.borderColor =  SSColor.appButton
@@ -367,8 +387,15 @@ class AddQueueVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
         case txtHospitalName :
             txtHospitalName.borderColor = SSColor.appButton
         case txtBranch :
+            if txtHospitalName.text != ""{
+                txtBranch.inputView = globalPickerView
+            }
+          
             txtBranch.borderColor = SSColor.appButton
         case txtProvider :
+            if txtBranch.text != ""{
+                txtProvider.inputView = globalPickerView
+            }
             txtProvider.borderColor = SSColor.appButton
         case txtDisease:
             diseaseView.borderColor =  SSColor.appButton
@@ -380,6 +407,8 @@ class AddQueueVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.tintColor = .clear
+
         switch textField {
         case txtName:
             nameView.borderColor =  SSColor.appBlack
@@ -398,6 +427,7 @@ class AddQueueVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
             
         default:break
         }
+
     }
     //------------------------------------------------------
     

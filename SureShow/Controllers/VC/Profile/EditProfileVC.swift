@@ -131,7 +131,7 @@ class EditProfileVC : BaseVC, UITextViewDelegate, UITextFieldDelegate, ImagePick
         }
         //        parameters["cellno"] = "\(getSAppDefault(key: "countryName") as? String ?? "")-\(txtPhoneNum.text ?? "")" as AnyObject
         //,"type":"1"
-        let paramds = ["first_name":txtFirstName.text ?? "" ,"last_name":txtLastName.text ?? "","email":txtEmail.text ?? "","cellno":"\(txtMobileNumber.text ?? "")","usertype":"1","countrycode":getSAppDefault(key: "countryName") as? String ?? ""] as [String : Any]
+        let paramds = ["first_name":txtFirstName.text ?? "" ,"last_name":txtLastName.text ?? "","email":txtEmail.text ?? "","cellno":"\(txtMobileNumber.text ?? "")","usertype":"2","countrycode":getSAppDefault(key: "countryName") as? String ?? ""] as [String : Any]
         
         let strURL = kBASEURL + WSMethods.editProfile
         
@@ -332,7 +332,7 @@ class EditProfileVC : BaseVC, UITextViewDelegate, UITextFieldDelegate, ImagePick
         var sPhotoStr = getProfileResp?.image
         sPhotoStr = sPhotoStr?.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? ""
         //        if sPhotoStr != ""{
-        imgProfile.sd_setImage(with: URL(string: sPhotoStr ?? ""), placeholderImage:UIImage(named:"place"))
+        imgProfile.sd_setImage(with: URL(string: sPhotoStr ?? ""), placeholderImage:UIImage(named:"placeholderProfileImg"))
         
         self.countryCodeBtn.contentHorizontalAlignment = .center
         self.countryCodeBtn.clipsToBounds = true

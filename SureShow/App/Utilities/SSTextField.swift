@@ -273,6 +273,17 @@ class SSUserNameDropDownTextField: SSMediumTextField, UITextFieldDelegate, UIPic
     
     //MARK: Customs
     
+    override func caretRect(for position: UITextPosition) -> CGRect {
+        return .zero
+      }
+      
+      override func selectionRects(for range: UITextRange) -> [UITextSelectionRect] {
+        return []
+      }
+      
+      override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        return false
+      }
     func setup() {
         
         rightView = rightUserView
@@ -596,6 +607,7 @@ class SSAppointmentTextField: SSMediumTextField, UITextFieldDelegate {
         if #available(iOS 13.4, *) {
             dpDate.preferredDatePickerStyle = .wheels
             dpDate.backgroundColor = .white
+            dpDate.minimumDate = Date()
             //          dpDate.maximumDate = Date()
             dpDate.setValue(UIColor.black, forKeyPath: "textColor")
             dpDate.setValue(false, forKeyPath: "highlightsToday")
@@ -1470,7 +1482,7 @@ class SSAppointmentTypeTextField: SSMediumTextField, UITextFieldDelegate, UIPick
         self.delegate = self
     }
 }
-class SSHospitalTextField: SSMediumTextField, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class SSHospitalTextField: SSMediumTextField, UITextFieldDelegate{
     
     var rightUserView: UIView {
         let imgView = UIImageView(image: UIImage(named: SSImageName.iconDropDown))
@@ -1482,8 +1494,8 @@ class SSHospitalTextField: SSMediumTextField, UITextFieldDelegate, UIPickerViewD
     private static let crossButtonSize = CGSize(width: height, height: height)
     private let crossButtonView = UIButton(frame: CGRect(origin: CGPoint.zero, size: crossButtonSize))
     
-    let pvGender = UIPickerView()
-    let pvOptions: [String] = [" Not to Answer", "Lorem", "Ipsum"]
+//    let pvGender = UIPickerView()
+//    let pvOptions: [String] = []
     var selectedOption: String? {
         didSet {
             self.text = selectedOption
@@ -1493,7 +1505,17 @@ class SSHospitalTextField: SSMediumTextField, UITextFieldDelegate, UIPickerViewD
     //------------------------------------------------------
     
     //MARK: Customs
-    
+    override func caretRect(for position: UITextPosition) -> CGRect {
+        return .zero
+      }
+      
+      override func selectionRects(for range: UITextRange) -> [UITextSelectionRect] {
+        return []
+      }
+      
+      override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        return false
+      }
     func setup() {
         
         rightView = rightUserView
@@ -1505,9 +1527,9 @@ class SSHospitalTextField: SSMediumTextField, UITextFieldDelegate, UIPickerViewD
         self.autocapitalizationType = .words
         self.tintColor = .clear
         
-        pvGender.dataSource = self
-        pvGender.delegate = self
-        inputView = pvGender
+//        pvGender.dataSource = self
+//        pvGender.delegate = self
+//        inputView = pvGender
         
         crossButtonView.contentMode = .center
         crossButtonView.setImage(UIImage(named: ""), for: UIControl.State.normal)
@@ -1544,35 +1566,35 @@ class SSHospitalTextField: SSMediumTextField, UITextFieldDelegate, UIPickerViewD
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        if selectedOption == nil {
-            selectedOption = pvOptions.first
-        }
+//        if selectedOption == nil {
+//            selectedOption = pvOptions.first
+//        }
     }
     
     //------------------------------------------------------
     
     //MARK: UIPickerViewDataSource
     
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pvOptions.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pvOptions[row]
-    }
-    
-    //------------------------------------------------------
-    
-    //MARK: UIPickerViewDelegate
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedOption = pvOptions[row]
-    }
-    
+//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+//        return 1
+//    }
+//
+//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+//        return pvOptions.count
+//    }
+//
+//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        return pvOptions[row]
+//    }
+//
+//    //------------------------------------------------------
+//
+//    //MARK: UIPickerViewDelegate
+//
+//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//        selectedOption = pvOptions[row]
+//    }
+//
     //------------------------------------------------------
     
     //MARK: Init

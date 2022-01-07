@@ -48,7 +48,9 @@ struct AddAppointmentListData<T>{
     var appoint_date:String
     var appoint_start_time:String
     var appoint_end_time:String
-    
+    var appointment_type:String
+    var description:String
+
     
     init?(dataDict:[String:T]) {
         
@@ -70,7 +72,9 @@ struct AddAppointmentListData<T>{
         let appoint_date = dataDict["appoint_date"] as? String ?? ""
         let appoint_start_time = dataDict["appoint_start_time"] as? String ?? ""
         let appoint_end_time = dataDict["appoint_end_time"] as? String ?? ""
-        
+        let appointment_type = dataDict["appointment_type"] as? String ?? ""
+        let description = dataDict["description"] as? String ?? ""
+
         
         
         self.id = id
@@ -90,7 +94,9 @@ struct AddAppointmentListData<T>{
         self.appoint_date = appoint_date
         self.appoint_start_time = appoint_start_time
         self.appoint_end_time = appoint_end_time
-        
+        self.appointment_type = appointment_type
+        self.description = description
+
     }
     
 }

@@ -12,12 +12,16 @@ import KRPullLoader
 class NotificationVC: UIViewController {
     
     @IBOutlet weak var tblNotification: UITableView!
+    
+    @IBOutlet weak var notificationNotFoundPopUpView: UIView!
+    
     var lastPageNo = 1
     var notificationListArr:[NotificationListData<AnyHashable>]?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         tblNotification.dataSource = self
         tblNotification.delegate = self
         
@@ -28,6 +32,7 @@ class NotificationVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.notificationNotFoundPopUpView.isHidden =  true
         lastPageNo = 1
         getNotificationListApi()
         
@@ -44,7 +49,7 @@ class NotificationVC: UIViewController {
         DispatchQueue.main.async {
             AFWrapperClass.svprogressHudShow(title:"Loading...", view:self)
         }
-        ModalResponse().getNotificationListApi(perPage:9, page: lastPageNo){ response in
+        ModalResponse().getNotificationListApi(perPage:5000, page: lastPageNo){ response in
             AFWrapperClass.svprogressHudDismiss(view: self)
             print(response)
             
@@ -84,8 +89,7 @@ class NotificationVC: UIViewController {
                     appDel.logOut()
                 }
                 else{
-                    
-                    alert(AppAlertTitle.appName.rawValue, message: message, view: self)
+                    self.notificationNotFoundPopUpView.isHidden =  false
                 }
             }
             
@@ -105,9 +109,11 @@ extension NotificationVC : UITableViewDelegate , UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationsTVCell", for: indexPath) as! NotificationsTVCell
         cell.imgMain.sd_setImage(with: URL(string:notificationListArr?[indexPath.row].image.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? ""), placeholderImage:UIImage(named:"placeholderProfileImg"))
         cell.lblName.text = notificationListArr?[indexPath.row].notify_title ?? ""
+    //notificationListArr?[indexPath.row].creation_date.components(separatedBy: .whitespaces).last == "" ? "11:30 AM":notificationListArr?[indexPath.row].creation_date.components(separatedBy: .whitespaces).last ?? ""
+        cell.lblTime.text = notificationListArr?[indexPath.row].creation_date == "" ? "11:30 AM":notificationListArr?[indexPath.row].creation_date ?? ""
+        //notificationListArr?[indexPath.row].appoint_start_time ?? "" != "" && notificationListArr?[indexPath.row].appoint_end_time ?? "" != "" ? "\(returnFirstWordInString(string:notificationListArr?[indexPath.row].creation_date ?? "")), \(returnFirstWordInString(string:notificationListArr?[indexPath.row].appoint_start_time ?? ""))\(getAMPMFromTime(time: Int(notificationListArr?[indexPath.row].appoint_start_time ?? "") ?? 0)) to \(returnFirstWordInString(string:notificationListArr?[indexPath.row].appoint_end_time ?? ""))\(getAMPMFromTime(time:  Int(notificationListArr?[indexPath.row].appoint_end_time ?? "") ?? 0))" : "\(returnFirstWordInString(string:notificationListArr?[indexPath.row].creation_date ?? ""))"
         
-        cell.lblTime.text = notificationListArr?[indexPath.row].creation_date.components(separatedBy: .whitespaces).last == "" ? "11:30 AM":notificationListArr?[indexPath.row].creation_date.components(separatedBy: .whitespaces).last ?? ""
-        cell.lblAppointment.text = notificationListArr?[indexPath.row].appoint_start_time ?? "" != "" && notificationListArr?[indexPath.row].appoint_end_time ?? "" != "" ? "\(returnFirstWordInString(string:notificationListArr?[indexPath.row].creation_date ?? "")), \(returnFirstWordInString(string:notificationListArr?[indexPath.row].appoint_start_time ?? ""))\(getAMPMFromTime(time: Int(notificationListArr?[indexPath.row].appoint_start_time ?? "") ?? 0)) to \(returnFirstWordInString(string:notificationListArr?[indexPath.row].appoint_end_time ?? ""))\(getAMPMFromTime(time:  Int(notificationListArr?[indexPath.row].appoint_end_time ?? "") ?? 0))" : "\(returnFirstWordInString(string:notificationListArr?[indexPath.row].creation_date ?? ""))"
+        cell.lblAppointment.text = notificationListArr?[indexPath.row].notify_message ?? ""
         
         
         return cell
@@ -128,7 +134,7 @@ extension NotificationVC:KRPullLoadViewDelegate{
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+1) {
                     completionHandler()
                     
-                    self.getNotificationListApi()
+//                    self.getNotificationListApi()
                     
                 }
             default: break
@@ -151,7 +157,7 @@ extension NotificationVC:KRPullLoadViewDelegate{
             pullLoadView.messageLabel.text = "Updating..."
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+1) {
                 completionHandler()
-                self.getNotificationListApi()
+//                self.getNotificationListApi()
                 
             }
         }

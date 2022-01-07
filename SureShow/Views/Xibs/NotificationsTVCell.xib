@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -42,17 +42,17 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ctG-Fj-Qy8">
-                                <rect key="frame" x="70" y="2" width="208.5" height="96.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="ctG-Fj-Qy8">
+                                <rect key="frame" x="70" y="2" width="260" height="74"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Grave Jadson accepted your appointment schedule on." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7vl-Ul-f9J" customClass="SSMediumLabel" customModule="SureShow" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="208.5" height="63"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="224" height="42"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="5-12-2021, 12:00 PM to 02:00 Pm." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UND-sZ-RqS" customClass="SSRegularLabel" customModule="SureShow" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="76.5" width="202.5" height="20"/>
+                                        <rect key="frame" x="0.0" y="54" width="202.5" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="fZI-mD-46l"/>
                                         </constraints>
@@ -64,13 +64,12 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="UND-sZ-RqS" secondAttribute="bottom" id="Ezp-uU-zp6"/>
                                     <constraint firstItem="UND-sZ-RqS" firstAttribute="top" secondItem="7vl-Ul-f9J" secondAttribute="bottom" id="Ife-mp-F92"/>
-                                    <constraint firstAttribute="trailing" secondItem="7vl-Ul-f9J" secondAttribute="trailing" id="Or5-Pn-J9d"/>
                                     <constraint firstItem="7vl-Ul-f9J" firstAttribute="top" secondItem="ctG-Fj-Qy8" secondAttribute="top" id="ipS-kY-WRU"/>
                                     <constraint firstItem="7vl-Ul-f9J" firstAttribute="leading" secondItem="ctG-Fj-Qy8" secondAttribute="leading" id="wFF-qe-bUS"/>
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11:35 AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZtB-Xg-rBk" customClass="SSMediumLabel" customModule="SureShow" customModuleProvider="target">
-                                <rect key="frame" x="286" y="2" width="52.5" height="18.5"/>
+                                <rect key="frame" x="277.5" y="86" width="52.5" height="18.5"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="13"/>
                                 <color key="textColor" name="appGray"/>
                                 <nil key="highlightedColor"/>
@@ -93,12 +92,12 @@
                             <constraint firstItem="ctG-Fj-Qy8" firstAttribute="top" secondItem="O4h-8S-dnN" secondAttribute="top" id="H5U-Mf-Wf1"/>
                             <constraint firstItem="O4h-8S-dnN" firstAttribute="top" secondItem="6ld-Tl-AJd" secondAttribute="top" constant="2" id="J47-fm-RSH"/>
                             <constraint firstItem="O4h-8S-dnN" firstAttribute="leading" secondItem="6ld-Tl-AJd" secondAttribute="leading" constant="10" id="JbP-hb-i7d"/>
-                            <constraint firstItem="ZtB-Xg-rBk" firstAttribute="top" secondItem="ctG-Fj-Qy8" secondAttribute="top" id="aEf-2u-qCH"/>
-                            <constraint firstItem="ZtB-Xg-rBk" firstAttribute="leading" secondItem="ctG-Fj-Qy8" secondAttribute="trailing" constant="7.5" id="eTD-l9-uoe"/>
+                            <constraint firstItem="ZtB-Xg-rBk" firstAttribute="top" secondItem="ctG-Fj-Qy8" secondAttribute="bottom" constant="10" id="LMq-Qv-y8e"/>
+                            <constraint firstAttribute="trailing" secondItem="ctG-Fj-Qy8" secondAttribute="trailing" constant="6" id="WNY-k2-UvN"/>
                             <constraint firstAttribute="bottom" secondItem="y0Q-kF-FHc" secondAttribute="bottom" id="jxf-57-ZSM"/>
-                            <constraint firstItem="y0Q-kF-FHc" firstAttribute="top" secondItem="ctG-Fj-Qy8" secondAttribute="bottom" constant="10" id="kwz-Pg-6lu"/>
                             <constraint firstItem="ctG-Fj-Qy8" firstAttribute="leading" secondItem="O4h-8S-dnN" secondAttribute="trailing" constant="10" id="mvi-HB-GWN"/>
-                            <constraint firstItem="ctG-Fj-Qy8" firstAttribute="width" secondItem="6ld-Tl-AJd" secondAttribute="width" multiplier="0.62" id="tRH-DU-mDp"/>
+                            <constraint firstAttribute="trailing" secondItem="ZtB-Xg-rBk" secondAttribute="trailing" constant="6" id="rwK-EI-69Y"/>
+                            <constraint firstItem="y0Q-kF-FHc" firstAttribute="top" secondItem="ZtB-Xg-rBk" secondAttribute="bottom" constant="4" id="zVy-f6-V0f"/>
                         </constraints>
                     </view>
                 </subviews>

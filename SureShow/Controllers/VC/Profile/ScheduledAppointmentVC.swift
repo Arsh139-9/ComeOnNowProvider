@@ -10,6 +10,8 @@ import UIKit
 class ScheduledAppointmentVC:BaseVC,UITableViewDataSource,UITableViewDelegate{
     
     @IBOutlet weak var tblScheduleAppointment: UITableView!
+    @IBOutlet weak var scheduleAppointmentNotFoundPopUpView: UIView!
+    
     var lastPageNo:Int?
     var appointmentScheduleListArr:[ScheduledAppointmentListData<AnyHashable>]?
     var getAppointmentTypeListArray:[AppointmentTypeListData<AnyHashable>]?
@@ -46,7 +48,7 @@ class ScheduledAppointmentVC:BaseVC,UITableViewDataSource,UITableViewDelegate{
         DispatchQueue.main.async {
             AFWrapperClass.svprogressHudShow(title:"Loading...", view:self)
         }
-        ModalResponse().getScheduledAppointmentListApi(perPage:9, page: lastPageNo ?? 0){ response in
+        ModalResponse().getScheduledAppointmentListApi(perPage:5000, page: lastPageNo ?? 0){ response in
             AFWrapperClass.svprogressHudDismiss(view: self)
             
             let getAppointmentDataResp  = GetScheduledAppointmentData(dict:response as? [String : AnyHashable] ?? [:])
@@ -83,8 +85,8 @@ class ScheduledAppointmentVC:BaseVC,UITableViewDataSource,UITableViewDelegate{
                     removeAppDefaults(key:"AuthToken")
                     appDel.logOut()
                 }else{
-                    alert(AppAlertTitle.appName.rawValue, message: message, view: self)
-                    
+                    self.scheduleAppointmentNotFoundPopUpView.isHidden = false
+
                 }
                 
             }
@@ -163,6 +165,7 @@ class ScheduledAppointmentVC:BaseVC,UITableViewDataSource,UITableViewDelegate{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        scheduleAppointmentNotFoundPopUpView.isHidden = true
         lastPageNo = 1
         getScheduledAppointmentListsApi()
     }

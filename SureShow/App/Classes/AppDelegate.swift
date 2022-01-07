@@ -158,11 +158,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
         }
-        
+        UINavigationController().interactivePopGestureRecognizer?.isEnabled = false
+
         
         configureKeboard()
         getCustomFontDetails()
-        configureNavigationBar()
+//        configureNavigationBar()
         //        chekLoggedUser()
         //        registerRemoteNotificaton(application)
         //RealmManager.shared.save(channelDownload: false)

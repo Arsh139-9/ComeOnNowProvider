@@ -93,7 +93,6 @@ class AddAppointmentVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
         
         
         
-        
         if ValidationManager.shared.isEmpty(text: txtAppointment.text) == true {
             showAlertMessage(title: kAppName.localized(), message: "Please select appointment date" , okButton: "Ok", controller: self) {
                 

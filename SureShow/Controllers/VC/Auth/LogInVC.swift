@@ -20,7 +20,8 @@ class LogInVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
     
     var iconClick = true
     var returnKeyHandler: IQKeyboardReturnKeyHandler?
-    
+    var rememberMeSelected = false
+
     //------------------------------------------------------
     
     //MARK: Memory Management Method
@@ -40,26 +41,16 @@ class LogInVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
     //MARK: Customs
     
     func setup() {
-        
+        txtEmail.text = self.getEmail()
+        txtPassword.text = self.getPassword()
+        btnRememberMe.isSelected = rememberMeSelected
+        self.btnRememberMe.setImage(rememberMeSelected == true ? #imageLiteral(resourceName: "check") : #imageLiteral(resourceName: "uncheck"), for: .normal)
         returnKeyHandler = IQKeyboardReturnKeyHandler(controller: self)
         returnKeyHandler?.delegate = self
         
         txtEmail.delegate = self
         txtPassword.delegate = self
-        //        btnRememberMe.delegate = self
-        if PreferenceManager.shared.rememberMeEmail.isEmpty == false {
-            txtEmail.text = PreferenceManager.shared.rememberMeEmail
-            btnRememberMe.isRemember = true
-        } else {
-            btnRememberMe.isRemember = false
-        }
-        
-        if PreferenceManager.shared.rememberMePassword.isEmpty == false {
-            txtPassword.text = PreferenceManager.shared.rememberMePassword
-            btnRememberMe.isRemember = true
-        } else {
-            btnRememberMe.isRemember = false
-        }
+      
         
     }
     open func signInApi(){
@@ -73,6 +64,11 @@ class LogInVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
             let message = loginResp?.alertMessage ?? ""
             if let status = loginResp?.status  {
                 if status == 200{
+                    if self.rememberMeSelected == true{
+                        storeCredential(email: self.txtEmail.text!, password: self.txtPassword.text!)
+                    }else{
+                        removeCredential()
+                    }
                     setAppDefaults(loginResp?.access_token, key: "AuthToken")
                     let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = storyBoard.instantiateViewController(withIdentifier:"TabBarVC") as? TabBarVC
@@ -143,8 +139,14 @@ class LogInVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
         validate() == false ? returnFunc() : signInApi()
     }
     
-    @IBAction func btnRemeber(_ sender: Any) {
-        
+    @IBAction func btnRemeber(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        self.rememberMeSelected = sender.isSelected
+        self.btnRememberMe.setImage(rememberMeSelected == true ? #imageLiteral(resourceName: "check") : #imageLiteral(resourceName: "uncheck"), for: .normal)
+        if !rememberMeSelected{
+            removeAppDefaults(key: "userEmail")
+            removeAppDefaults(key: "userPassword")
+        }
     }
     
     @IBAction func btnEye(_ sender: Any) {
@@ -183,7 +185,34 @@ class LogInVC : BaseVC, UITextFieldDelegate, UITextViewDelegate {
         default:break
         }
     }
+    func getEmail() -> String
+    {
+        if let email =  UserDefaults.standard.value(forKey:"userEmail")
+        {
+            rememberMeSelected = true
+            return email as! String
+        }
+        else
+        {
+            rememberMeSelected = false
+            return ""
+        }
+    }
     
+    func getPassword() -> String
+    {
+        if let password =  UserDefaults.standard.value(forKey:"userPassword")
+        {
+            rememberMeSelected = true
+            return password as! String
+        }
+        else
+        {
+            rememberMeSelected = false
+            return ""
+            
+        }
+    }
     //------------------------------------------------------
     
     //MARK: UIViewController

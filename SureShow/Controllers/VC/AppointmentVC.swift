@@ -11,8 +11,9 @@ class AppointmentVC : BaseVC,UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tblAppointment: UITableView!
     
+    @IBOutlet weak var appointmentNotFoundPopUpView: UIView!
     
-    var lastPageNo:Int?
+    var lastPageNo = 0
     var addAppointmentListArr:[AddAppointmentListData<AnyHashable>]?
     var diseaseListArr:[DiseaseListData<AnyHashable>]?
     var getAppointmentTypeListArray:[AppointmentTypeListData<AnyHashable>]?
@@ -57,6 +58,8 @@ class AppointmentVC : BaseVC,UITableViewDataSource, UITableViewDelegate {
         
         tblAppointment.reloadData()
     }
+    
+    
     open func getDiseaseListApi(){
         ModalResponse().getDiseaseListApi(){ response in
             print(response)
@@ -115,14 +118,14 @@ class AppointmentVC : BaseVC,UITableViewDataSource, UITableViewDelegate {
         DispatchQueue.main.async {
             AFWrapperClass.svprogressHudShow(title:"Loading...", view:self)
         }
-        ModalResponse().getAppointmentListApi(perPage:9, page: lastPageNo ?? 0, status: 2){ response in
+        ModalResponse().getAppointmentListApi(perPage:5000, page: lastPageNo, status: 2){ response in
             AFWrapperClass.svprogressHudDismiss(view: self)
             
             let getAppointmentDataResp  = GetAddAppointmentData(dict:response as? [String : AnyHashable] ?? [:])
             let message = getAppointmentDataResp?.message ?? ""
             if let status = getAppointmentDataResp?.status{
                 if status == 200{
-                    self.lastPageNo = self.lastPageNo ?? 0 + 1
+                    self.lastPageNo = self.lastPageNo + 1
                     let getAppointmentListArr = getAppointmentDataResp?.addAppointmentListArray ?? []
                     
                     if getAppointmentListArr.count != 0{
@@ -155,8 +158,8 @@ class AppointmentVC : BaseVC,UITableViewDataSource, UITableViewDelegate {
                     removeAppDefaults(key:"AuthToken")
                     appDel.logOut()
                 }else{
-                    alert(AppAlertTitle.appName.rawValue, message: message, view: self)
-                    
+                    self.appointmentNotFoundPopUpView.isHidden =
+                    self.addAppointmentListArr?.count ?? 0 == 0 ? false : true
                 }
                 
             }
@@ -188,7 +191,7 @@ class AppointmentVC : BaseVC,UITableViewDataSource, UITableViewDelegate {
             cell.lblTime.text =  addAppointmentListArr?[indexPath.row].appoint_start_time ?? "" != "" && addAppointmentListArr?[indexPath.row].appoint_end_time ?? "" != "" ? "\(addAppointmentListArr?[indexPath.row].appoint_start_time ?? "") - \(addAppointmentListArr?[indexPath.row].appoint_end_time ?? "")" : ""
             
             cell.imgMain.sd_setImage(with: URL(string:                 addAppointmentListArr?[indexPath.row].image.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? ""
-                                              ), placeholderImage:UIImage(named:"place"))
+                                              ), placeholderImage:UIImage(named:"placeholderProfileImg"))
             return cell
         }
         
@@ -240,6 +243,7 @@ class AppointmentVC : BaseVC,UITableViewDataSource, UITableViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        appointmentNotFoundPopUpView.isHidden = true
         lastPageNo = 1
         getAppointmentListsApi()
         
@@ -254,7 +258,7 @@ extension AppointmentVC:KRPullLoadViewDelegate{
             case let .loading(completionHandler):
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+1) {
                     completionHandler()
-                    self.getAppointmentListsApi()
+//                    self.getAppointmentListsApi()
                     
                 }
             default: break
@@ -277,7 +281,7 @@ extension AppointmentVC:KRPullLoadViewDelegate{
             pullLoadView.messageLabel.text = "Updating..."
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+1) {
                 completionHandler()
-                self.getAppointmentListsApi()
+//                self.getAppointmentListsApi()
 
                 
             }

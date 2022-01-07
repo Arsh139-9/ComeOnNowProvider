@@ -18,6 +18,9 @@ class AppointmentDetailsVC : BaseVC {
     @IBOutlet weak var imgMain: UIImageView!
     @IBOutlet weak var lblName: SSSemiboldLabel!
     
+    @IBOutlet weak var appointmentTypeLbl: SSMediumLabel!
+    @IBOutlet weak var descriptionLbl: SSRegularLabel!
+    
     var addAppointmentListDict:AddAppointmentListData<AnyHashable>?
     
     //------------------------------------------------------
@@ -42,7 +45,9 @@ class AppointmentDetailsVC : BaseVC {
         lblName.text = "\(addAppointmentListDict?.last_name ?? "") \(addAppointmentListDict?.first_name ?? "")"
         lblGender.text =  addAppointmentListDict?.gender  == 1 ? "Male" : addAppointmentListDict?.gender  == 2 ? "Female" : "Others"
         lblDate.text = addAppointmentListDict?.appoint_date
-        
+        appointmentTypeLbl.text = addAppointmentListDict?.appointment_type
+        descriptionLbl.text = addAppointmentListDict?.description
+
         
         //addAppointmentListDict?.appoint_start_time ?? "" != "" && addAppointmentListDict?.appoint_end_time ?? "" != "" ? "\(returnFirstWordInString(string:addAppointmentListDict?.appoint_start_time ?? ""))\(getAMPMFromTime(time: Int(addAppointmentListDict?.appoint_start_time ?? "") ?? 0)) - \(returnFirstWordInString(string:addAppointmentListDict?.appoint_end_time ?? ""))\(getAMPMFromTime(time:  Int(addAppointmentListDict?.appoint_end_time ?? "") ?? 0))" : ""
         lblTime.text =  addAppointmentListDict?.appoint_start_time ?? "" != "" && addAppointmentListDict?.appoint_end_time ?? "" != "" ? "\(addAppointmentListDict?.appoint_start_time ?? "") - \(addAppointmentListDict?.appoint_end_time ?? "")" : ""
